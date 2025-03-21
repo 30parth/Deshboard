@@ -21,7 +21,10 @@ function App() {
       path: "/",
       element: <Layout/>, 
       children:[
-
+        {
+          path: "/",
+          element:<Dashboard/>,
+        },
         {
           path: "/Dashboard",
           element: <Dashboard />, 

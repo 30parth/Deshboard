@@ -1,9 +1,10 @@
 import React from 'react'
+import DashboardHeader from './DashboardHeader'
 
-const Order = (props) => {
+const Order = () => {
   return (
     <>
-      Order
+      <DashboardHeader header={"Order"}/>
     </>
   )
 }

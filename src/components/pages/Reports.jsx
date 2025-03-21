@@ -1,9 +1,10 @@
 import React from 'react'
+import DashboardHeader from './DashboardHeader'
 
 const Reports = (props) => {
   return (
   <> 
-    reports
+    <DashboardHeader header={"Reports"}/>
   </>
   )
 }

@@ -1,7 +1,8 @@
 import { React, useEffect, useRef } from 'react'
 import Chart from "chart.js/auto";
+import DashboardHeader from './DashboardHeader';
 
-const Dashboard = (props) => {
+const Dashboard = () => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
@@ -34,7 +35,7 @@ const Dashboard = (props) => {
             24003,
             23489,
             24092,
-            12034
+            12964
           ],
           lineTension: 0,
           backgroundColor: 'transparent',
@@ -63,20 +64,7 @@ const Dashboard = (props) => {
   }, []);
   return (
     <>
-        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 className="h2">Dashboard</h1>
-          <div className="btn-toolbar mb-2 mb-md-0">
-            <div className="btn-group me-2">
-              <button type="button" className="btn btn-sm btn-outline-secondary">Share</button>
-              <button type="button" className="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button type="button" className="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <span data-feather="calendar"></span>
-              This week
-            </button>
-          </div>
-        </div>
-
+        <DashboardHeader header={"Dashboard"}/>
         <canvas className="my-4 w-100" ref={chartRef} id="myChart" width="900" height="380"></canvas>
         {/* <canvas className="my-4 w-100"  id="myChart" width="900" height="380"></canvas> */}
 

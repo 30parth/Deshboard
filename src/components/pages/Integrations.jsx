@@ -1,10 +1,11 @@
 
 import React from 'react'
+import DashboardHeader from './DashboardHeader'
 
 const Integrations = (props) => {
   return (
    <>
-    Intergration
+    <DashboardHeader header={"Intergration"} />
    </>
   )
 }

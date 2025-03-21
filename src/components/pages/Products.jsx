@@ -1,8 +1,9 @@
 import React from 'react'
+import DashboardHeader from './DashboardHeader'
 const Products = (props) => {
   return (
     <>
-      Products
+      <DashboardHeader header={"Products"}/>
     </>
   )
 }
