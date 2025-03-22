@@ -1,10 +1,10 @@
 import React from 'react'
-import DashboardHeader from './DashboardHeader'
+import ComponentHeader from './ComponentHeader'
 
 const Customer = (props) => {
   return (
    <>
-    <DashboardHeader header={"Customer"}/>  
+    <ComponentHeader header={"Customer"} showButton={false} />  
   </>
   )
 }

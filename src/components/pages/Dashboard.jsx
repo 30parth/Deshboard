@@ -1,6 +1,6 @@
 import { React, useEffect, useRef } from 'react'
 import Chart from "chart.js/auto";
-import DashboardHeader from './DashboardHeader';
+import ComponentHeader from './ComponentHeader';
 
 const Dashboard = () => {
   const chartRef = useRef(null);
@@ -64,7 +64,7 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-        <DashboardHeader header={"Dashboard"}/>
+        <ComponentHeader header={"Dashboard"} showButton={true}/>
         <canvas className="my-4 w-100" ref={chartRef} id="myChart" width="900" height="380"></canvas>
         {/* <canvas className="my-4 w-100"  id="myChart" width="900" height="380"></canvas> */}
 

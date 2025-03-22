@@ -1,10 +1,10 @@
 import React from 'react'
-import DashboardHeader from './DashboardHeader'
+import ComponentHeader from './ComponentHeader'
 
 const Order = () => {
   return (
     <>
-      <DashboardHeader header={"Order"}/>
+      <ComponentHeader header={"Order"} showButton={false}/>
     </>
   )
 }

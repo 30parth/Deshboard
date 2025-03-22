@@ -1,9 +1,9 @@
 import React from 'react'
-import DashboardHeader from './DashboardHeader'
+import ComponentHeader from './ComponentHeader'
 const Products = (props) => {
   return (
     <>
-      <DashboardHeader header={"Products"}/>
+      <ComponentHeader header={"Products"} showButton={false}/>
     </>
   )
 }
