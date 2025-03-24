@@ -5,6 +5,7 @@ const MainCom = () => {
     <>
     <div className='bg-dark col text-info'>
       Main
+      {console.log("hiiii")}
     </div>
     </>
   )

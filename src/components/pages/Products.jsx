@@ -1,5 +1,5 @@
 import React from 'react'
-import ComponentHeader from './ComponentHeader'
+import ComponentHeader from '../layout/ComponentHeader'
 const Products = (props) => {
   return (
     <>

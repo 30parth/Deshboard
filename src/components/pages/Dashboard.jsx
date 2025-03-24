@@ -1,6 +1,6 @@
 import { React, useEffect, useRef } from 'react'
 import Chart from "chart.js/auto";
-import ComponentHeader from './ComponentHeader';
+import ComponentHeader from '../layout/ComponentHeader';
 
 const Dashboard = () => {
   const chartRef = useRef(null);
@@ -51,7 +51,12 @@ const Dashboard = () => {
               beginAtZero: false
             }
           }]
-        },    
+        },
+        plugins:{
+          legend:{
+            display: false,
+          }
+        }    
       }
     });
 

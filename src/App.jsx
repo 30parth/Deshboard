@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react'
+import {React , useState} from 'react'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,17 +13,35 @@ import Integrations from './components/pages/Integrations'
 import Layout from './components/layout/layout'
 import 'bootstrap/dist/js/bootstrap.bundle.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import MainCom from './components/pages/MainCom';
 
 
 function App() {
+  const [Login, setLogin] = useState(false);
+
+  const chageLogin =  ()  =>{
+    if(Login === false)
+    {
+      setLogin(true);
+      console.log(Login);
+    }
+    else {
+      setLogin(false);
+      console.log(Login);
+    }
+  }
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout/>, 
+      element: <Layout login={Login} chageLogin={chageLogin}/>, 
       children:[
         {
           path: "/",
           element:<Dashboard/>,
+        },
+        {
+          path: "/Main",
+          element:<MainCom/>,
         },
         {
           path: "/Dashboard",
