@@ -1,12 +1,14 @@
-import React from 'react'
+import {React , useContext} from 'react'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import { Outlet } from 'react-router-dom'
-import SingIn from '../pages/SingIn'
+import SignIn from '../pages/Signin'
+import { loginContext } from '../../context/context';
 
-const layout = (props) => {
+const layout = () => {
+  const {Login } = useContext(loginContext);
   // console.log(props.login)
-  if (props.login === true) {
+  if (Login === true) {
     return (
       <>
         <Header/> 
@@ -21,7 +23,7 @@ const layout = (props) => {
   }
   else{
     // {console.log("Login false")}
-    return (<SingIn Login={props.login} chageLogin={props.chageLogin}/>)
+    return (<SignIn />)
   }
 }
 

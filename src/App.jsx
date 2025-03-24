@@ -1,5 +1,5 @@
 import './App.css';
-import {React , useState} from 'react'
+import { React, useState } from 'react'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,69 +14,72 @@ import Layout from './components/layout/layout'
 import 'bootstrap/dist/js/bootstrap.bundle.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import MainCom from './components/pages/MainCom';
+import { loginContext } from './context/context';
 
 
 function App() {
   const [Login, setLogin] = useState(false);
 
-  const chageLogin =  ()  =>{
-    if(Login === false)
-    {
-      setLogin(true);
-      console.log(Login);
-    }
-    else {
-      setLogin(false);
-      console.log(Login);
-    }
+  const changeLogin = () => {
+    // if (Login === false) {
+    //   setLogin(true);
+    //   console.log(Login);
+    // }
+    // else {
+    //   setLogin(false);
+    //   console.log(Login);
+    // }
+    setLogin(!Login);
+    console.log(Login);
   }
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout login={Login} chageLogin={chageLogin}/>, 
-      children:[
+      element: <Layout/>,
+      children: [
         {
           path: "/",
-          element:<Dashboard/>,
+          element: <Dashboard />,
         },
         {
           path: "/Main",
-          element:<MainCom/>,
+          element: <MainCom />,
         },
         {
           path: "/Dashboard",
-          element: <Dashboard />, 
+          element: <Dashboard />,
         },
         {
           path: "/Orders",
-          element: <Order />, 
+          element: <Order />,
         },
         {
           path: "/Products",
-          element: <Products />, 
+          element: <Products />,
         },
-      
+
         {
           path: "/Customers",
-          element: <Customer />, 
+          element: <Customer />,
         },
-        
+
         {
           path: "/Reports",
-          element: <Reports />, 
+          element: <Reports />,
         },
-        
+
         {
           path: "/Integrations",
-          element: <Integrations />, 
+          element: <Integrations />,
         }
       ]
     }
   ])
   return (
     <>
-       
+      <loginContext.Provider value={{Login , changeLogin}}>
         <RouterProvider router={router} />
+      </loginContext.Provider>
     </>
   );
 }

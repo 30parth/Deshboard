@@ -1,14 +1,18 @@
-import React from 'react'
+import {React, useContext} from 'react'
 import { useNavigate } from "react-router-dom";
-import './singin.css'
-const SingIn = (props) => {
+import './signIn.css'
+import { loginContext } from '../../context/context';
+
+const SignIn = () => {
+    const {Login , changeLogin } = useContext(loginContext);
+
     const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault(); // Prevent the form's default submit action
         console.log("Navigating to /dashboard");
         navigate('/dashboard'); // Redirect to the "/dashboard" path
-        props.chageLogin(); 
-        console.log(props.Login);
+        changeLogin(); 
+        console.log(Login);
     }
     return (
         <div className="text-center" >    
@@ -38,4 +42,4 @@ const SingIn = (props) => {
     )
 }
 
-export default SingIn
+export default SignIn
