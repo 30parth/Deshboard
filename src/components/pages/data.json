@@ -1,0 +1,19 @@
+{
+    "customers": [
+      { "customer_name": "Alice Johnson", "customer_id": 101, "customer_ordered": "Laptop" },
+      { "customer_name": "Bob Smith", "customer_id": 102, "customer_ordered": "Tablet" },
+      { "customer_name": "Carol Davis", "customer_id": 103, "customer_ordered": "Smartphone" },
+      { "customer_name": "David Brown", "customer_id": 104, "customer_ordered": "Printer" },
+      { "customer_name": "Emma Wilson", "customer_id": 105, "customer_ordered": "Monitor" },
+      { "customer_name": "Frank Miller", "customer_id": 106, "customer_ordered": "Keyboard" },
+      { "customer_name": "Grace Lee", "customer_id": 107, "customer_ordered": "Mouse" },
+      { "customer_name": "Hannah White", "customer_id": 108, "customer_ordered": "Desk Chair" },
+      { "customer_name": "Ian Harris", "customer_id": 109, "customer_ordered": "Webcam" },
+      { "customer_name": "Jane Adams", "customer_id": 110, "customer_ordered": "Speaker" },
+      { "customer_name": "Kyle Taylor", "customer_id": 111, "customer_ordered": "Graphics Card" },
+      { "customer_name": "Laura Martinez", "customer_id": 112, "customer_ordered": "External Hard Drive" },
+      { "customer_name": "Mike Anderson", "customer_id": 113, "customer_ordered": "Router" },
+      { "customer_name": "Nina Clark", "customer_id": 114, "customer_ordered": "Headphones" },
+      { "customer_name": "Oscar Wright", "customer_id": 115, "customer_ordered": "Microphone" }
+    ]
+}
