@@ -1,11 +1,12 @@
 import {React ,useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link ,useLocation} from 'react-router-dom'
 import feather from 'feather-icons' 
 const Sidebar = () => {
     useEffect(() => {
         // Initialize Feather Icons after rendering
         feather.replace();
       }, []); // Dependency array is empty to run this only on mount    
+    const location = useLocation();
     return (
         <>
             <div className="row">
@@ -13,37 +14,37 @@ const Sidebar = () => {
                     <div className="position-sticky pt-3">
                         <ul className="nav flex-column">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/dashboard">
+                                <Link className={location.pathname==="/dashboard"?"nav-link active":"nav-link"} aria-current="page" to="/dashboard">
                                     <span data-feather="home"></span>
                                     Dashboard
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/orders">
+                                <Link className={location.pathname==="/orders"?"nav-link active":"nav-link"}  to="/orders">
                                     <span data-feather="file"></span>
                                     Orders
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/products">
+                                <Link className={location.pathname==="/products"?"nav-link active":"nav-link"}  to="/products">
                                     <span data-feather="shopping-cart"></span>
                                     Products
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/customers">
+                                <Link className={location.pathname==="/customers"?"nav-link active":"nav-link"}  to="/customers">
                                     <span data-feather="users"></span>
                                     Customers
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/reports">
+                                <Link className={location.pathname==="/reports"?"nav-link active":"nav-link"}  to="/reports">
                                     <span data-feather="bar-chart-2"></span>
                                     Reports
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/integrations">
+                                <Link className={location.pathname==="/integrations"?"nav-link active":"nav-link"}  to="/integrations">
                                     <span data-feather="layers"></span>
                                     Integrations
                                 </Link>

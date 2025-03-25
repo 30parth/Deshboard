@@ -4,7 +4,7 @@ import Table from './Table'
 const Products = (props) => {
   return (
     <>
-      <ComponentHeader header={"Products"} showButton={false}/>
+      <ComponentHeader header={"Products"} showButton={true}/>
       <Table tableName={"Products"}/>
     </>
   )

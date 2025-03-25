@@ -5,7 +5,7 @@ import Table from './Table'
 const Order = () => {
   return (
     <>
-      <ComponentHeader header={"Order"} showButton={false}/>
+      <ComponentHeader header={"Order"} showButton={true}/>
       <Table tableName={"Order"}/>
     </>
   )
