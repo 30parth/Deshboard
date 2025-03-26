@@ -3,22 +3,22 @@ import { React, useState } from 'react'
 
 const Table = (props) => {
     console.log(props.data);
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const rowsPerPage = 5;
+    const [currentPage, setCurrentPage] = useState(1);
+    const rowsPerPage = 5;
 
-    // console.log(location);
-    // const totalPages = Math.ceil(products.length / rowsPerPage);
+    console.log(location);
+    const totalPages = Math.ceil(products.length / rowsPerPage);
 
-    // const currentData = dashboradData.customers.slice(
-    //     (currentPage - 1) * rowsPerPage,
-    //     currentPage * rowsPerPage
-    // );
+    const currentData = dashboradData.customers.slice(
+        (currentPage - 1) * rowsPerPage,
+        currentPage * rowsPerPage
+    );
 
-    // const changePage = (page) => {
-    //     if (page >= 1 && page <= totalPages) {
-    //         setCurrentPage(page);
-    //     }
-    // };
+    const changePage = (page) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
     return (
         <>
             <div className="table-responsive">
@@ -52,7 +52,7 @@ const Table = (props) => {
                     </tbody>
                 </table>
             </div>
-            {/* <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation example">
                 <ul className="pagination">
                     <li className="page-item"><button className="page-link" onClick={() => changePage(index - 1)} disabled={currentPage === 1}
                     >Previous</button></li>
@@ -64,7 +64,7 @@ const Table = (props) => {
                     <li className="page-item"><button className="page-link" onClick={() => changePage(index + 1)} disabled={currentPage === totalPages}
                     >Next</button></li>
                 </ul>
-            </nav> */}
+            </nav>
         </>
     )
 }
