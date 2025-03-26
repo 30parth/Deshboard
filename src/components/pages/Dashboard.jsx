@@ -1,11 +1,12 @@
-import { React, useEffect, useRef } from 'react'
+import { React, useEffect, useRef ,useState} from 'react'
 import Chart from "chart.js/auto";
 import ComponentHeader from '../layout/ComponentHeader';
 import Table from './Table';
 
 const Dashboard = () => {
-  const chartRef = useRef(null);
-  const chartInstance = useRef(null);
+  const chartRef = useRef("");
+  const chartInstance = useRef("");
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const ctx = chartRef.current.getContext("2d");
@@ -53,11 +54,11 @@ const Dashboard = () => {
             }
           }]
         },
-        plugins:{
-          legend:{
+        plugins: {
+          legend: {
             display: false,
           }
-        }    
+        }
       }
     });
 
@@ -70,12 +71,12 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-        <ComponentHeader header={"Dashboard"} showButton={true}/>
-        <canvas className="my-4 w-100" ref={chartRef} id="myChart" width="900" height="380"></canvas>
-        {/* <canvas className="my-4 w-100"  id="myChart" width="900" height="380"></canvas> */}
+      <ComponentHeader header={"Dashboard"} showButton={true} />
+      <canvas className="my-4 w-100" ref={chartRef} id="myChart" width="900" height="380"></canvas>
+      {/* <canvas className="my-4 w-100"  id="myChart" width="900" height="380"></canvas> */}
 
-        <h2>Section title</h2>
-        <Table tableName={"Dashboard"}/>
+      <h2>Section title</h2>
+      <Table data={products} />
     </>
   )
 }

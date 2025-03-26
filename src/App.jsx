@@ -18,24 +18,17 @@ import { loginContext } from './context/context';
 
 
 function App() {
-  const [Login, setLogin] = useState(false);
-
+  const [Login, setLogin] = useState(true);
   const changeLogin = () => {
-    // if (Login === false) {
-    //   setLogin(true);
-    //   console.log(Login);
-    // }
-    // else {
-    //   setLogin(false);
-    //   console.log(Login);
-    // }
     setLogin(!Login);
     console.log(Login);
   }
+
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout/>,
+      element: <Layout />,
       children: [
         {
           path: "/",
@@ -77,7 +70,7 @@ function App() {
   ])
   return (
     <>
-      <loginContext.Provider value={{Login , changeLogin}}>
+      <loginContext.Provider value={{ Login, changeLogin }}>
         <RouterProvider router={router} />
       </loginContext.Provider>
     </>

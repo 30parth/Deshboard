@@ -8,6 +8,7 @@ import { loginContext } from '../../context/context';
 const layout = () => {
   const {Login } = useContext(loginContext);
   // console.log(props.login)
+
   if (Login === true) {
     return (
       <>
@@ -16,7 +17,7 @@ const layout = () => {
           <Sidebar/>
         </div>
         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <Outlet/>
+          <Outlet />
         </main>
       </>
     )

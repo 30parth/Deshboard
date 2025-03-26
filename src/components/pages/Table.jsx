@@ -1,47 +1,58 @@
-import {React,useState} from 'react'
-import dashboradData from './data.json';
-
+import { React, useState } from 'react'
+// import dashboradData from './data.json';
 
 const Table = (props) => {
+    console.log(props.data);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const rowsPerPage = 5;
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const rowsPerPage = 5;
+    // console.log(location);
+    // const totalPages = Math.ceil(products.length / rowsPerPage);
 
-    const totalPages = Math.ceil(dashboradData.customers.length / rowsPerPage);
+    // const currentData = dashboradData.customers.slice(
+    //     (currentPage - 1) * rowsPerPage,
+    //     currentPage * rowsPerPage
+    // );
 
-    const currentData = dashboradData.customers.slice(
-        (currentPage - 1) * rowsPerPage,
-        currentPage * rowsPerPage
-    );
-
-    const changePage = (page) => {
-        if (page >= 1 && page <= totalPages) {
-            setCurrentPage(page);
-        }
-    };
+    // const changePage = (page) => {
+    //     if (page >= 1 && page <= totalPages) {
+    //         setCurrentPage(page);
+    //     }
+    // };
     return (
         <>
             <div className="table-responsive">
                 <table className="table table-striped table-sm">
                     <thead>
                         <tr>
-                            <th scope="col">Customer Name</th>
-                            <th scope="col">Customer Id</th>
-                            <th scope="col">Customer Ordered</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Product Id</th>
+                            <th scope="col">Product Ordered</th>
+                            <th scope="col">Opration</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {currentData.map((customers, index) => (
-                            <tr key={index} >
-                                <td>{customers.customer_name}</td>
-                                <td>{customers.customer_id}</td>
-                                <td>{customers.customer_ordered}</td>
+                    {props.data.length > 0 ? (
+                        props.data.map((datas, index) => (
+                            <tr key={index}>
+                                <td>{datas.name}</td>
+                                <td>{datas.id}</td>
+                                <td>{datas.type}</td>
+                                <td>
+                                       <button type="button" className="btn btn-warning">Edit</button>
+                                    <button type="button" className="btn btn-danger">Delete</button>
+                                </td>
                             </tr>
-                        ))}
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4">No products available</td>
+                        </tr>
+                    )}
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
+            {/* <nav aria-label="Page navigation example">
                 <ul className="pagination">
                     <li className="page-item"><button className="page-link" onClick={() => changePage(index - 1)} disabled={currentPage === 1}
                     >Previous</button></li>
@@ -53,7 +64,7 @@ const Table = (props) => {
                     <li className="page-item"><button className="page-link" onClick={() => changePage(index + 1)} disabled={currentPage === totalPages}
                     >Next</button></li>
                 </ul>
-            </nav>
+            </nav> */}
         </>
     )
 }
