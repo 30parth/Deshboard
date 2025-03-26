@@ -1,29 +1,34 @@
-import { React, useState } from 'react'
+import { React, useState ,useEffect} from 'react'
 
-const ProductForm = ({handleAdd}) => {
+
+
+const ProductForm = ({ handleAdd, product }) => {
+  const [name, setName] = useState(product?.name || '');
+  const [id, setId] = useState(product?.id || '');
+  const [type, setType] = useState(product?.type || '');
+
+  useEffect(() => {
+    setName(product?.name || '');
+    setId(product?.id || '');
+    setType(product?.type || '');
+  }, [product]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Hi i am product form handlesubmit");
-    const product = { name, id, type };
-    handleAdd(product);
+    console.log("Hi, I am ProductForm handleSubmit");
+    const updatedProduct = { name, id, type };
+    handleAdd(updatedProduct);
+
+    // Clear form fields after submission
     setName('');
     setId('');
     setType('');
 
-
-
-
-    // Close modal manually using Bootstrap method
+    // Close modal manually using Bootstrap
     const modal = document.getElementById('exampleModal');
     const modalInstance = bootstrap.Modal.getInstance(modal);
     modalInstance.hide();
   };
-
-
-  const [name, setName] = useState('');
-  const [id, setId] = useState('');
-  const [type, setType] = useState('');
-  console.log("This is order");
   return (
     <>
       <form onSubmit={handleSubmit} >
@@ -43,7 +48,7 @@ const ProductForm = ({handleAdd}) => {
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >Add</button>
+          <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >{product ? "Edit" : "Add"}</button>
         </div>
       </form>
     </>

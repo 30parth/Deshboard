@@ -1,16 +1,29 @@
-import { React ,useState} from 'react'
+import { React, useState , useEffect} from 'react'
 
-const OrderForm = ({handleAdd}) => {
-  const [OrderId, setOrderId] = useState("");
-  const [Customer_id, setCustomer_id] = useState("");
-  const [Status, setStatus] = useState("");
-  const [Amount, setAmount] = useState("");
+const OrderForm = ({ handleAdd, order }) => {
+  const [OrderId, setOrderId] = useState(order?.OrderId || '');
+  const [Customer_id, setCustomer_id] = useState(order?.Customer_id || '');
+  const [Status, setStatus] = useState(order?.Status || '');
+  const [Amount, setAmount] = useState(order?.Amount || '');
+
+
+  useEffect(() => {
+    setAmount(order?.Amount || '');
+    setCustomer_id(order?.Customer_id || '');
+    setStatus(order?.Status || '');
+    setOrderId(order?.OrderId || '');
+  }, [order]);
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Hi i am order form handlesubmit");
-    const orders = { OrderId,Customer_id, Status ,Amount};
+    const orders = { OrderId, Customer_id, Status, Amount };
     handleAdd(orders);
+
+
+
     setAmount('');
     setCustomer_id('');
     setStatus('');
@@ -24,6 +37,7 @@ const OrderForm = ({handleAdd}) => {
   };
 
 
+
   console.log("This is order");
   return (
     <form onSubmit={handleSubmit} >
@@ -31,7 +45,7 @@ const OrderForm = ({handleAdd}) => {
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Order ID</label>
           <input type="text" className="form-control" id="recipient-name" value={OrderId} onChange={(e) => setOrderId(e.target.value)} />
-        </div>x
+        </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Customer_id</label>
           <input type="text" className="form-control" id="recipient-name" value={Customer_id} onChange={(e) => setCustomer_id(e.target.value)} />
@@ -47,7 +61,7 @@ const OrderForm = ({handleAdd}) => {
       </div>
       <div className="modal-footer">
         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >Add</button>
+        <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >{order ? "Edit" : "Add"}</button>
       </div>
     </form>
   )

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import OrderForm from '../pages/OrderForm'
 import ProductForm from '../pages/ProductForm'
 
-const ModalComp = ({modalTitle, handleAdd,component}) => {
+const ModalComp = ({modalTitle, component}) => {
     let location = useLocation()
     return (
         <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
