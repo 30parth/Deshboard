@@ -40,8 +40,6 @@ const Products = () => {
   };
 
 
-
-
   return (
     <>
       <ComponentHeader header={"Products"} showButton={true} />
@@ -60,8 +58,8 @@ const Products = () => {
         <table className="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col">Product Name</th>
               <th scope="col">Product Id</th>
+              <th scope="col">Product Name</th>
               <th scope="col">Product Ordered</th>
               <th scope="col">Opration</th>
             </tr>
@@ -70,8 +68,8 @@ const Products = () => {
             {products.length > 0 ? (
               products.map((datas, index) => (
                 <tr key={index}>
-                  <td>{datas.name}</td>
                   <td>{datas.id}</td>
+                  <td>{datas.name}</td>
                   <td>{datas.type}</td>
                   <td>
                     <button type="button" className="btn btn-warning btn-sm" data-bs-target="#exampleModal" onClick={() => handleEdit(datas)}>Edit</button>

@@ -44,7 +44,7 @@ const OrderForm = ({ handleAdd, order }) => {
       <div className="modal-body">
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Order ID</label>
-          <input type="text" className="form-control" id="recipient-name" value={OrderId} onChange={(e) => setOrderId(e.target.value)} />
+          <input type="text" className="form-control" id="recipient-name" value={OrderId} onChange={(e) => setOrderId(e.target.value)} disabled={order}/>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Customer_id</label>

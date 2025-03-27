@@ -35,7 +35,7 @@ const ProductForm = ({ handleAdd, product }) => {
         <div className="modal-body">
           <div className="mb-3">
             <label htmlFor="recipient-name" className="col-form-label">Product ID</label>
-            <input type="text" className="form-control" id="recipient-name" value={id} onChange={(e) => setId(e.target.value)} />
+            <input type="text" className="form-control" id="recipient-name" value={id} onChange={(e) => setId(e.target.value)} disabled={product}/>
           </div>
           <div className="mb-3">
             <label htmlFor="recipient-name" className="col-form-label">Product Name</label>
