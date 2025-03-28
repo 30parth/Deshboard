@@ -88,6 +88,14 @@ const AccountForm = ({ handleAdd }) => {
         });
     }
 
+
+    const removeForm = (index) => {
+        setAccount(prevState => ({
+            ...prevState,
+            contects: prevState.contects.filter((_, idx) => idx !== index)
+        }));
+    };
+
     // const [Id, setId] = useState('');
     // const [Code, setCode] = useState('');
     // const [Name, setName] = useState('');
@@ -171,13 +179,15 @@ const AccountForm = ({ handleAdd }) => {
                             />
                         </div>
                         <div className="col-md-1">
-                            <button
-                                type="button"
-                                className="btn btn-light"
-                                onClick={addNewForm}
-                            >
-                                +
-                            </button>
+                            {index === account.contects.length - 1 ? (
+                                <button type="button" className="btn btn-light" onClick={addNewForm}>
+                                    +
+                                </button>
+                            ) : (
+                                <button type="button" className="btn btn-danger" onClick={() => removeForm(index)}>
+                                    -
+                                </button>
+                            )}
                         </div>
                     </div>
                 ))}
