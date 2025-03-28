@@ -7,7 +7,7 @@ import {
 import Dashboard from './components/pages/Dashboard'
 import Order from './components/pages/Order'
 import Products from './components/pages/Products'
-import Customer from './components/pages/Customer'
+import Account from './components/pages/Account'
 import Reports from './components/pages/Reports'
 import Integrations from './components/pages/Integrations'
 import Layout from './components/layout/layout'
@@ -52,8 +52,8 @@ function App() {
         },
 
         {
-          path: "/Customers",
-          element: <Customer />,
+          path: "/Account",
+          element: <Account />,
         },
 
         {

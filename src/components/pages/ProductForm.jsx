@@ -35,15 +35,15 @@ const ProductForm = ({ handleAdd, product }) => {
         <div className="modal-body">
           <div className="mb-3">
             <label htmlFor="recipient-name" className="col-form-label">Product ID</label>
-            <input type="text" className="form-control" id="recipient-name" value={id} onChange={(e) => setId(e.target.value)} disabled={product}/>
+            <input type="text" className="form-control" id="recipient-name" value={id} onChange={(e) => setId(e.target.value)} disabled={product} required/>
           </div>
           <div className="mb-3">
             <label htmlFor="recipient-name" className="col-form-label">Product Name</label>
-            <input type="text" className="form-control" id="recipient-name" value={name} onChange={(e) => setName(e.target.value)} />
+            <input type="text" className="form-control" id="recipient-name" value={name} onChange={(e) => setName(e.target.value)} required/>
           </div>
           <div className="mb-3">
             <label htmlFor="recipient-name" className="col-form-label">Product Acive</label>
-            <input type="text" className="form-control" id="recipient-name" value={type} onChange={(e) => setType(e.target.value)} />
+            <input type="text" className="form-control" id="recipient-name" value={type} onChange={(e) => setType(e.target.value)} required/>
           </div>
         </div>
         <div className="modal-footer">

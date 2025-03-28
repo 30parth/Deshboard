@@ -1,0 +1,19 @@
+{
+    id: "",
+    code: "",
+    name: "",
+    address: {
+      type: "",
+      address: "",
+      city: "",
+      state: "",
+      country: "",
+    },
+    contects: [
+        {
+      contectType: "",
+      contectPerson: "",
+      contectDetail: "",
+        }
+    ],
+}

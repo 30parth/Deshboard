@@ -32,9 +32,9 @@ const Sidebar = () => {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className={location.pathname==="/customers"?"nav-link active":"nav-link"}  to="/customers">
+                                <Link className={location.pathname==="/account"?"nav-link active":"nav-link"}  to="/account">
                                     <span data-feather="users"></span>
-                                    Customers
+                                    Account
                                 </Link>
                             </li>
                             <li className="nav-item">

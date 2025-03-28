@@ -34,9 +34,12 @@ const Products = () => {
 
 
   const handleDelete = (id) => {
-    const updatedProducts = products.filter((product) => product.id !== id);
-    setProducts(updatedProducts);
-    console.log("Product deleted:", id);
+    const isConFirm = window.confirm('Are you sure you want to delete this');
+    if (isConFirm) {
+      const updatedProducts = products.filter((product) => product.id !== id);
+      setProducts(updatedProducts);
+      console.log("Product deleted:", id);
+    }
   };
 
 
@@ -72,7 +75,7 @@ const Products = () => {
                   <td>{datas.name}</td>
                   <td>{datas.type}</td>
                   <td>
-                    <button type="button" className="btn btn-warning btn-sm" data-bs-target="#exampleModal" onClick={() => handleEdit(datas)}>Edit</button>
+                    <button type="button" className="btn btn-warning btn-sm" onClick={() => handleEdit(datas)}>Edit</button>
                     <button type="button" className="btn btn-danger btn-sm" onClick={() => handleDelete(datas.id)}>Delete</button>
                   </td>
                 </tr>

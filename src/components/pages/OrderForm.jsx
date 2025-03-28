@@ -44,19 +44,19 @@ const OrderForm = ({ handleAdd, order }) => {
       <div className="modal-body">
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Order ID</label>
-          <input type="text" className="form-control" id="recipient-name" value={OrderId} onChange={(e) => setOrderId(e.target.value)} disabled={order}/>
+          <input type="text" className="form-control" id="recipient-name" value={OrderId} onChange={(e) => setOrderId(e.target.value)} disabled={order} required/>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Customer_id</label>
-          <input type="text" className="form-control" id="recipient-name" value={Customer_id} onChange={(e) => setCustomer_id(e.target.value)} />
+          <input type="text" className="form-control" id="recipient-name" value={Customer_id} onChange={(e) => setCustomer_id(e.target.value)} required/>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">status</label>
-          <input type="text" className="form-control" id="recipient-name" value={Status} onChange={(e) => setStatus(e.target.value)} />
+          <input type="text" className="form-control" id="recipient-name" value={Status} onChange={(e) => setStatus(e.target.value)} required/>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">total_amount</label>
-          <input type="text" className="form-control" id="recipient-name" value={Amount} onChange={(e) => setAmount(e.target.value)} />
+          <input type="text" className="form-control" id="recipient-name" value={Amount} onChange={(e) => setAmount(e.target.value)} required/>
         </div>
       </div>
       <div className="modal-footer">

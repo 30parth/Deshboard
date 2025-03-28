@@ -32,9 +32,12 @@ const Order = () => {
   };
 
   const handleDelete = (id) => {
-    const updatedOrders = orders.filter((order) => order.OrderId !== id);
-    setOrders(updatedOrders);
-    console.log("Order deleted:", id);
+    const isConFirm = window.confirm('Are you sure you want to delete this');
+    if (isConFirm) {  
+      const updatedOrders = orders.filter((order) => order.OrderId !== id);
+      setOrders(updatedOrders);
+      console.log("Order deleted:", id);
+    }
   };
 
 
@@ -75,6 +78,7 @@ const Order = () => {
                   <td>
                     <button type="button" className="btn btn-warning btn-sm" onClick={() => handleEdit(datas)} >Edit</button>
                     <button type="button" className="btn btn-danger btn-sm" onClick={() => handleDelete(datas.OrderId)}>Delete</button>
+                    <button type="button" className="btn btn-info btn-sm" onClick={() => {}}>View</button>
                   </td>
                 </tr>
               ))
