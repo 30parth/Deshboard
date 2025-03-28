@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 
 const AccountForm = ({ handleAdd }) => {
     const [AddContect, setAddContect] = useState(1);
-    
+
     const [account, setAccount] = useState({
         id: "",
         code: "",
@@ -23,11 +23,18 @@ const AccountForm = ({ handleAdd }) => {
         ],
     });
     const addNewForm = () => {
-        setAddContect(AddContect + 1); 
-      };
+        setAccount(prevState => ({
+            ...prevState,
+            contects: [
+                ...prevState.contects,
+                { contectType: "", contectPerson: "", contectDetail: "" }
+            ]
+        }));
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-    
+
         // Handle nested fields like address and contacts
         const keys = name.split('.');
         if (keys.length > 1) {
@@ -54,7 +61,7 @@ const AccountForm = ({ handleAdd }) => {
             )
         }));
     };
-    
+
     console.log(account);
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -115,39 +122,67 @@ const AccountForm = ({ handleAdd }) => {
                     </div>
                     <div className="col-md-4">
                         {/* <label htmlFor="inputCity" className="form-label">City</label> */}
-                        <input type="text" className="form-control" id="City" name="address.city" value={account.address.city} onChange={handleChange} placeholder="City"/>
+                        <input type="text" className="form-control" id="City" name="address.city" value={account.address.city} onChange={handleChange} placeholder="City" />
                     </div>
                     <div className="col-md-4">
                         {/* <label htmlFor="inputState" className="form-label">State</label> */}
-                        <input type="text" className="form-control" id="state" name="address.state" value={account.address.state} onChange={handleChange} placeholder="State"/>
+                        <input type="text" className="form-control" id="state" name="address.state" value={account.address.state} onChange={handleChange} placeholder="State" />
                     </div>
                     <div className="col-md-4">
                         {/* <label htmlFor="inputZip" className="form-label">Country</label> */}
-                        <input type="text" className="form-control" id="country" name="address.country" value={account.address.country} onChange={handleChange} placeholder="Country"/>
+                        <input type="text" className="form-control" id="country" name="address.country" value={account.address.country} onChange={handleChange} placeholder="Country" />
                     </div>
                 </div>
-                {Array.from({ length: AddContect }).map((_, index) => (  
-                    <div className="row g-2" key={index}>
+                {account.contects.map((contact, index) => (
+                    <div className="row g-2 py-2" key={index}>
                         <div className="col-md-4">
-                            <select id="contectType" className="form-select" name="contectType" value={account.contects[index]?.contectType || ""} onChange={(e) => handleArrayChange(e, 0)}>
-                                <option value="ContType">Contect Type</option>
-                                <option value="Moblie">Moblie</option>
+                            <select
+                                id="contectType"
+                                className="form-select"
+                                name="contectType"
+                                value={contact.contectType}
+                                onChange={(e) => handleArrayChange(e, index)}
+                            >
+                                <option value="ContType">Contact Type</option>
+                                <option value="Mobile">Mobile</option>
                                 <option value="Email">Email</option>
                             </select>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" id="contectDetail" name="contectDetail" value={account.contects[index]?.contectDetail || ""} onChange={(e) => handleArrayChange(e, 0)}placeholder="Contect Detail" />
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="contectDetail"
+                                name="contectDetail"
+                                value={contact.contectDetail}
+                                onChange={(e) => handleArrayChange(e, index)}
+                                placeholder="Contact Detail"
+                            />
                         </div>
                         <div className="col-md-3">
-                            <input type="text" className="form-control" name="contectPerson" value={account.contects[index]?.contectPerson || ""} id="contectPerson" onChange={(e) => handleArrayChange(e, 0)} placeholder="Contect Name" />
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="contectPerson"
+                                value={contact.contectPerson}
+                                id="contectPerson"
+                                onChange={(e) => handleArrayChange(e, index)}
+                                placeholder="Contact Name"
+                            />
                         </div>
                         <div className="col-md-1">
-                            <button className="btn btn-light" onClick={addNewForm}>+</button>
+                            <button
+                                type="button"
+                                className="btn btn-light"
+                                onClick={addNewForm}
+                            >
+                                +
+                            </button>
                         </div>
                     </div>
                 ))}
             </div>
-            
+
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >Add</button>
