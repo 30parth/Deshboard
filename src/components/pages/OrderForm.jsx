@@ -38,7 +38,7 @@ const OrderForm = ({ handleAdd, order }) => {
 
 
 
-  console.log("This is order");
+  // console.log("This is order");
   return (
     <form onSubmit={handleSubmit} >
       <div className="modal-body">

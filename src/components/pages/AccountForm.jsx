@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 
 const AccountForm = ({ handleAdd }) => {
-    const [AddContect, setAddContect] = useState(1);
+    const [Addcontact, setAddcontact] = useState(1);
 
     const [account, setAccount] = useState({
         id: "",
@@ -14,20 +14,20 @@ const AccountForm = ({ handleAdd }) => {
             state: "",
             country: "",
         },
-        contects: [
+        contacts: [
             {
-                contectType: "",
-                contectPerson: "",
-                contectDetail: "",
+                contactType: "",
+                contactPerson: "",
+                contactDetail: "",
             }
         ],
     });
     const addNewForm = () => {
         setAccount(prevState => ({
             ...prevState,
-            contects: [
-                ...prevState.contects,
-                { contectType: "", contectPerson: "", contectDetail: "" }
+            contacts: [
+                ...prevState.contacts,
+                { contactType: "", contactPerson: "", contactDetail: "" }
             ]
         }));
     };
@@ -56,7 +56,7 @@ const AccountForm = ({ handleAdd }) => {
         const { name, value } = e.target;
         setAccount(prevState => ({
             ...prevState,
-            contects: prevState.contects.map((contact, idx) =>
+            contacts: prevState.contacts.map((contact, idx) =>
                 idx === index ? { ...contact, [name]: value } : contact
             )
         }));
@@ -78,11 +78,11 @@ const AccountForm = ({ handleAdd }) => {
                 state: "",
                 country: "",
             },
-            contects: [
+            contacts: [
                 {
-                    contectType: "",
-                    contectPerson: "",
-                    contectDetail: "",
+                    contactType: "",
+                    contactPerson: "",
+                    contactDetail: "",
                 }
             ],
         });
@@ -92,7 +92,7 @@ const AccountForm = ({ handleAdd }) => {
     const removeForm = (index) => {
         setAccount(prevState => ({
             ...prevState,
-            contects: prevState.contects.filter((_, idx) => idx !== index)
+            contacts: prevState.contacts.filter((_, idx) => idx !== index)
         }));
     };
 
@@ -141,14 +141,14 @@ const AccountForm = ({ handleAdd }) => {
                         <input type="text" className="form-control" id="country" name="address.country" value={account.address.country} onChange={handleChange} placeholder="Country" />
                     </div>
                 </div>
-                {account.contects.map((contact, index) => (
+                {account.contacts.map((contact, index) => (
                     <div className="row g-2 py-2" key={index}>
                         <div className="col-md-4">
                             <select
-                                id="contectType"
+                                id="contactType"
                                 className="form-select"
-                                name="contectType"
-                                value={contact.contectType}
+                                name="contactType"
+                                value={contact.contactType}
                                 onChange={(e) => handleArrayChange(e, index)}
                             >
                                 <option value="ContType">Contact Type</option>
@@ -160,9 +160,9 @@ const AccountForm = ({ handleAdd }) => {
                             <input
                                 type="text"
                                 className="form-control"
-                                id="contectDetail"
-                                name="contectDetail"
-                                value={contact.contectDetail}
+                                id="contactDetail"
+                                name="contactDetail"
+                                value={contact.contactDetail}
                                 onChange={(e) => handleArrayChange(e, index)}
                                 placeholder="Contact Detail"
                             />
@@ -171,15 +171,15 @@ const AccountForm = ({ handleAdd }) => {
                             <input
                                 type="text"
                                 className="form-control"
-                                name="contectPerson"
-                                value={contact.contectPerson}
-                                id="contectPerson"
+                                name="contactPerson"
+                                value={contact.contactPerson}
+                                id="contactPerson"
                                 onChange={(e) => handleArrayChange(e, index)}
                                 placeholder="Contact Name"
                             />
                         </div>
                         <div className="col-md-1">
-                            {index === account.contects.length - 1 ? (
+                            {index === account.contacts.length - 1 ? (
                                 <button type="button" className="btn btn-light" onClick={addNewForm}>
                                     +
                                 </button>

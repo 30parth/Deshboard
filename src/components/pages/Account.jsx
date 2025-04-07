@@ -2,11 +2,13 @@ import { React, useState } from 'react'
 import ComponentHeader from '../layout/ComponentHeader'
 import ModalComp from '../layout/ModalComp'
 import AccountForm from './AccountForm'
+import ModalView from '../layout/ModalView'
+import ViewAccount from './ViewAccount'
 
 const Account = () => {
 
     const [Accounts, setAccounts] = useState([]);
-
+    const [ViewAcc, setViewAcc] = useState([]);
 
     const handleAddAccount = (account) => {
         setAccounts([...Accounts, account]);
@@ -15,23 +17,30 @@ const Account = () => {
 
     const handleDelete = (id) => {
         const isConFirm = window.confirm('Are you sure you want to delete this');
-        if (isConFirm) {  
-          const updatedaccounts = Accounts.filter((Accounts) => Accounts.id !== id);
-          setAccounts(updatedaccounts);
-          console.log("account deleted:", id);
+        if (isConFirm) {
+            const updatedaccounts = Accounts.filter((Accounts) => Accounts.id !== id);
+            setAccounts(updatedaccounts);
+            console.log("account deleted:", id);
         }
-      };    
-    
-    
+    };
+
+    const handleView = (account) => {
+        setViewAcc([account]);
+        const modal = document.getElementById('ViewModel');
+        const modalInstance = new bootstrap.Modal(modal);
+        modalInstance.show();
+    };
+
     return (
         <>
             <div>
                 <>
                     <ComponentHeader header={"Accounts"} showButton={true} />
                     <ModalComp modalTitle={"Add Account"} component={<AccountForm handleAdd={handleAddAccount} />} />
+                    <ModalView modalTitle={"View The Account"} ViewTable={<ViewAccount ViewData={ViewAcc}/>} />
                 </>
             </div>
-            
+
             <div className="table-responsive">
                 <table className="table table-striped table-sm">
                     <thead>
@@ -52,6 +61,8 @@ const Account = () => {
                                     <td>
                                         <button type="button" className="btn btn-warning btn-sm" onClick={() => handleEdit(datas)} >Edit</button>
                                         <button type="button" className="btn btn-danger btn-sm" onClick={() => handleDelete(datas.id)}>Delete</button>
+                                        <button type="button" className="btn btn-info btn-sm" onClick={() => handleView(datas)} >View</button>
+
                                     </td>
                                 </tr>
                             ))
@@ -64,7 +75,6 @@ const Account = () => {
                 </table>
             </div>
         </>
-
     )
 }
 

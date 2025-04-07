@@ -3,11 +3,11 @@ import ComponentHeader from '../layout/ComponentHeader'
 // import Table from './Table'
 import ModalComp from '../layout/ModalComp';
 import OrderForm from './OrderForm';
-
+import ModalView from '../layout/ModalView';
+import ViewOrder from './VIewOrder';
 const Order = () => {
   const [orders, setOrders] = useState([]);
-  
-
+  const [ShowOnView, setShowOnView] = useState([]);
     const [currentOrder, setCurrentOrder] = useState(null);
   
     const handleEdit = (order) => {
@@ -31,6 +31,7 @@ const Order = () => {
     console.log("Product added:", order);
   };
 
+
   const handleDelete = (id) => {
     const isConFirm = window.confirm('Are you sure you want to delete this');
     if (isConFirm) {  
@@ -40,11 +41,33 @@ const Order = () => {
     }
   };
 
+  const handleView = (view) => {
+    console.log("View",view);
+    setShowOnView([view]);
+    console.log("Show the data ",ShowOnView);
+    const modal = document.getElementById('ViewModel');
+    const modalInstance = new bootstrap.Modal(modal);
+    modalInstance.show();
+  }
+
+  const handleExportOrder = () => {
+    console.log("this is data export")
+    const fileData = JSON.stringify(orders, null, 2); // nicely formatted
+    const blob = new Blob([fileData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "exportedData.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
 
   return (
     <>
-      <ComponentHeader header={"Order"} showButton={true} />
+      <ComponentHeader header={"Order"} showButton={true} handleExport={handleExportOrder} />
       {/* <Table data={orders} /> */}
       {/* <ModalComp modalTitle={"Add Order"} handleAdd={handleAddOrders} component={<OrderForm  handleAdd={handleAddOrders}/>} /> */}
       <ModalComp
@@ -56,6 +79,8 @@ const Order = () => {
           />
         }
       />
+
+      <ModalView modalTitle={"View The Order"} ViewTable={<ViewOrder ViewData={ShowOnView}/>}/>
       <div className="table-responsive">
         <table className="table table-striped table-sm">
           <thead>
@@ -78,9 +103,9 @@ const Order = () => {
                   <td>
                     <button type="button" className="btn btn-warning btn-sm" onClick={() => handleEdit(datas)} >Edit</button>
                     <button type="button" className="btn btn-danger btn-sm" onClick={() => handleDelete(datas.OrderId)}>Delete</button>
-                    <button type="button" className="btn btn-info btn-sm" onClick={() => {}}>View</button>
+                    <button type="button" className="btn btn-info btn-sm"  onClick={()=> handleView(datas)} >View</button>
                   </td>
-                </tr>
+                </tr> 
               ))
             ) : (
               <tr>
