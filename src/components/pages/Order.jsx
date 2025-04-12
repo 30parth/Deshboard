@@ -53,8 +53,9 @@ const Order = () => {
 
   const handleExportOrder = () => {
     console.log("this is data export")
-    const fileData = JSON.stringify(orders, null, 2); // nicely formatted
+    const fileData = JSON.stringify(orders); // nicely formatted
     const blob = new Blob([fileData], { type: "application/json" });
+    console.log(blob)
     const url = URL.createObjectURL(blob);
 
     const link = document.createElement("a");

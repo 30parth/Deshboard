@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react'
 import feather from 'feather-icons'
 
 
-const ComponentHeader = ({ header, showButton }) => {
+const ComponentHeader = ({ header, showButton ,handleExport }) => {
     useEffect(() => {
         // Initialize Feather Icons after rendering
         feather.replace();
@@ -20,7 +20,7 @@ const ComponentHeader = ({ header, showButton }) => {
                             <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
                             <button type="button" className="btn btn-sm btn-outline-secondary" onClick={(e) => alert(header + " is Called")}>Share</button>
                         </div>
-                        <button type="button" onClick={()=> {alert("Export")}} className="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <button type="button" onClick={()=> {handleExport()}} className="btn btn-sm btn-outline-secondary dropdown-toggle">
                             <span data-feather="calendar"></span>
                             Export 
                         </button>

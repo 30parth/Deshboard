@@ -18,7 +18,7 @@ const Dashboard = () => {
 
     // Create a new chart instance
     chartInstance.current = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: [
           'Sunday',
