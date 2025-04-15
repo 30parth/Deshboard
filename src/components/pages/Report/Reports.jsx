@@ -1,5 +1,5 @@
 import React from 'react'
-import ComponentHeader from '../layout/ComponentHeader'
+import ComponentHeader from '../../layout/ComponentHeader'
 
 const Reports = (props) => {
   return (

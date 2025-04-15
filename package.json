@@ -10,9 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.5",
     "chart.js": "^4.4.8",
+    "export-from-json": "^1.7.4",
     "feather-icons": "^4.29.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.4.0"

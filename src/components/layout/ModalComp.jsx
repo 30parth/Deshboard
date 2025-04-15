@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import OrderForm from '../pages/OrderForm'
-import ProductForm from '../pages/ProductForm'
+import OrderForm from '../pages/Order/OrderForm'
+import ProductForm from '../pages/Product/ProductForm'
 
 const ModalComp = ({modalTitle, component}) => {
     let location = useLocation()

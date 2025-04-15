@@ -1,9 +1,13 @@
-import { React, useState } from 'react'
-import ComponentHeader from '../layout/ComponentHeader'
-import ModalComp from '../layout/ModalComp'
+import { React, useState ,useRef } from 'react'
+import ComponentHeader from '../../layout/ComponentHeader'
+import ModalComp from '../../layout/ModalComp'
 import AccountForm from './AccountForm'
-import ModalView from '../layout/ModalView'
+import ModalView from '../../layout/ModalView'
 import ViewAccount from './ViewAccount'
+import jsPDF from 'jspdf';
+import "jspdf-autotable";
+import html2canvas from 'html2canvas';
+import exportFromJSON from 'export-from-json'
 
 const Account = () => {
 
@@ -31,18 +35,68 @@ const Account = () => {
         modalInstance.show();
     };
 
+
+
+    const handleExportCsv = () => {
+        const fileName = "Account";
+        const exportType = exportFromJSON.types.csv;
+        exportFromJSON({ data: Accounts, fileName, exportType })
+    }
+
+
+    const handleExportJson = () => {
+        if (Accounts.length !== 0) {
+            console.log("this is data export")
+            const fileData = JSON.stringify(Accounts); // nicely formatted
+            const blob = new Blob([fileData], { type: "application/json" });
+            console.log(blob)
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "account.json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        else {
+            alert("Insert first");
+        }
+    };
+
+    const printData = useRef(null);
+   
+
+    const handleExportPdf = async () => {
+
+        const element = printData.current;
+        const canvas = await html2canvas(element, { scale: 2, });
+        const data = canvas.toDataURL('image/png');
+
+
+        const doc = new jsPDF({
+            format: "a4",
+        });
+        const imgPro = doc.getImageProperties(data);
+        const width = doc.internal.pageSize.getHeight();
+        const hight = (imgPro.height * width) / imgPro.width;
+        doc.addImage(data, 'PNG', 0, 0, width, hight);
+        doc.save("account.pdf");
+    }
+
+
     return (
         <>
             <div>
                 <>
-                    <ComponentHeader header={"Accounts"} showButton={true} />
+                    <ComponentHeader header={"Accounts"} showButton={true} handleExportJson={handleExportJson} handleExportPdf={handleExportPdf} handleExportCsv={handleExportCsv} />
                     <ModalComp modalTitle={"Add Account"} component={<AccountForm handleAdd={handleAddAccount} />} />
-                    <ModalView modalTitle={"View The Account"} ViewTable={<ViewAccount ViewData={ViewAcc}/>} />
+                    <ModalView modalTitle={"View The Account"} ViewTable={<ViewAccount ViewData={ViewAcc} />} />
                 </>
             </div>
 
             <div className="table-responsive">
-                <table className="table table-striped table-sm">
+                <table ref={printData} className="table table-striped table-sm">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>

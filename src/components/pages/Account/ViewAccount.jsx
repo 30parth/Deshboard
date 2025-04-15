@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const ViewAccount = ({ ViewData }) => {
+const ViewAccount = ({ ViewData ,DisplayTable }) => {
     const [account, setAccount] = useState([]);
     console.log(ViewData);
     useEffect(() => {
@@ -20,6 +20,7 @@ const ViewAccount = ({ ViewData }) => {
         }
     }, [ViewData]);
     console.log("Company.contacts:", account.contacts);
+
     return (
         <div className="container py-4">
             <h4 className="mb-3">Account Info</h4>

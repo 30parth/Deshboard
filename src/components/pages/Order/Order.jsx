@@ -1,10 +1,14 @@
-import { React, useState } from 'react'
-import ComponentHeader from '../layout/ComponentHeader'
+import { React, useState, useRef } from 'react'
+import ComponentHeader from '../../layout/ComponentHeader'
 // import Table from './Table'
-import ModalComp from '../layout/ModalComp';
+import ModalComp from '../../layout/ModalComp';
 import OrderForm from './OrderForm'
-import ViewOrder from './VIewOrder';
-import ModalView from '../layout/ModalView';
+import ViewOrder from './ViewOrder';
+import ModalView from '../../layout/ModalView';
+import jsPDF from 'jspdf';
+import "jspdf-autotable";
+import html2canvas from 'html2canvas';
+import exportFromJSON from 'export-from-json'
 
 const Order = () => {
   const [orders, setOrders] = useState([]);
@@ -51,25 +55,59 @@ const Order = () => {
     }
   };
 
-  const handleExportOrder = () => {
-    console.log("this is data export")
-    const fileData = JSON.stringify(orders); // nicely formatted
-    const blob = new Blob([fileData], { type: "application/json" });
-    console.log(blob)
-    const url = URL.createObjectURL(blob);
 
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "exportedData.json";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleExportCsv = () => {
+    const fileName = "order";
+    const exportType = exportFromJSON.types.csv;
+    exportFromJSON({ data: orders, fileName, exportType })
+  }
+
+
+  const handleExportJson = () => {
+    if (orders.length !== 0) {
+      console.log("this is data export")
+      const fileData = JSON.stringify(orders); // nicely formatted
+      const blob = new Blob([fileData], { type: "application/json" });
+      console.log(blob)
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "Orders.json";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    else {
+      alert("Insert first");
+    }
   };
+
+  const printData = useRef(null);
+  
+  const handleExportPdf = async () => {
+
+    const element = printData.current;
+    const canvas = await html2canvas(element,{scale:2,});
+    const data = canvas.toDataURL('image/png');
+
+
+    const doc = new jsPDF({
+      format: "a4",
+    });
+    const imgPro = doc.getImageProperties(data);
+    const width = doc.internal.pageSize.getHeight();
+    const hight = (imgPro.height * width) / imgPro.width;
+    doc.addImage(data,'PNG' , 0, 0, width , hight);    
+    doc.save("Order.pdf");
+  }
+
 
 
   return (
     <>
-      <ComponentHeader header={"Order"} showButton={true} handleExport={handleExportOrder} />
+      <ComponentHeader header={"Orders"} showButton={true} handleExportJson={handleExportJson} handleExportPdf={handleExportPdf} handleExportCsv={handleExportCsv} />
+
       {/* <Table data={orders} /> */}
       {/* <ModalComp modalTitle={"Add Order"} handleAdd={handleAddOrders} component={<OrderForm  handleAdd={handleAddOrders}/>} /> */}
       <ModalComp
@@ -84,7 +122,7 @@ const Order = () => {
       <ModalView modalTitle={"View The Order"} ViewTable={<ViewOrder ViewData={ShowOnView} />} />
 
       <div className="table-responsive">
-        <table className="table table-striped table-sm">
+        <table ref={printData} className="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">Order Id</th>

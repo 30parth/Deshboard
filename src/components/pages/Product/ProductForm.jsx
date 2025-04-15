@@ -26,9 +26,11 @@ const ProductForm = ({ handleAdd, product }) => {
     setType('');
 
     // Close modal manually using Bootstrap
-    const modal = document.getElementById('exampleModal');
-    const modalInstance = bootstrap.Modal.getInstance(modal);
-    modalInstance.hide();
+    if (validated) {
+      const modal = document.getElementById('exampleModal');
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+    }
   };
 
   const onSubmit = (event) => {
@@ -37,7 +39,7 @@ const ProductForm = ({ handleAdd, product }) => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      handleSubmit(event) ;
+      handleSubmit(event);
     }
     setValidated(true);
   };

@@ -2,7 +2,7 @@ import {React , useContext} from 'react'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import { Outlet } from 'react-router-dom'
-import SignIn from '../pages/Signin'
+import SignIn from '../pages/SignIn/Signin'
 import { loginContext } from '../../context/context';
 
 const layout = () => {

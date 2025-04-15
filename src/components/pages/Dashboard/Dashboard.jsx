@@ -1,7 +1,7 @@
 import { React, useEffect, useRef ,useState} from 'react'
 import Chart from "chart.js/auto";
-import ComponentHeader from '../layout/ComponentHeader';
-import Table from './Table';
+import ComponentHeader from '../../layout/ComponentHeader';
+import Table from '../Table/Table';
 
 const Dashboard = () => {
   const chartRef = useRef("");
@@ -18,7 +18,7 @@ const Dashboard = () => {
 
     // Create a new chart instance
     chartInstance.current = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: [
           'Sunday',

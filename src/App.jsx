@@ -4,12 +4,12 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import Dashboard from './components/pages/Dashboard'
-import Order from './components/pages/Order'
-import Products from './components/pages/Products'
-import Account from './components/pages/Account'
-import Reports from './components/pages/Reports'
-import Integrations from './components/pages/Integrations'
+import Dashboard from './components/pages/Dashboard/Dashboard'
+import Order from './components/pages/Order/Order'
+import Products from './components/pages/Product/Products'
+import Account from './components/pages/Account/Account'
+import Reports from './components/pages/Report/Reports'
+import Integrations from './components/pages/Integrations/Integrations'
 import Layout from './components/layout/layout'
 import 'bootstrap/dist/js/bootstrap.bundle.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
