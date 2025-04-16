@@ -1,7 +1,6 @@
 import {React,useEffect,useState} from 'react'
 
 const ViewOrder = ({ ViewData }) => {
-    console.log(ViewData);
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -10,8 +9,6 @@ const ViewOrder = ({ ViewData }) => {
         }
     }, [ViewData]);
 
-    console.log('Is Array:', Array.isArray(ViewData));
-    console.log('Length:', ViewData?.length);
     return (
         <>
             <table className="table table-bordered table-hover table-striped align-middle">

@@ -1,4 +1,4 @@
-import { React, useState, useRef } from 'react'
+import { React, useState, useRef, useEffect } from 'react'
 import ComponentHeader from '../../layout/ComponentHeader'
 // import Table from './Table'
 import ModalComp from '../../layout/ModalComp';
@@ -9,12 +9,15 @@ import jsPDF from 'jspdf';
 import "jspdf-autotable";
 import html2canvas from 'html2canvas';
 import exportFromJSON from 'export-from-json'
-
+import { useOutletContext } from 'react-router-dom';
 const Order = () => {
   const [orders, setOrders] = useState([]);
   const [currentOrder, setCurrentOrder] = useState(null);
   const [ShowOnView, setShowOnView] = useState([]);
 
+  const input = useOutletContext();
+
+  console.log("this is the order com", input);
 
   const handleEdit = (order) => {
     setCurrentOrder(order);
@@ -84,11 +87,11 @@ const Order = () => {
   };
 
   const printData = useRef(null);
-  
+
   const handleExportPdf = async () => {
 
     const element = printData.current;
-    const canvas = await html2canvas(element,{scale:2,});
+    const canvas = await html2canvas(element, { scale: 2, });
     const data = canvas.toDataURL('image/png');
 
 
@@ -98,10 +101,16 @@ const Order = () => {
     const imgPro = doc.getImageProperties(data);
     const width = doc.internal.pageSize.getHeight();
     const hight = (imgPro.height * width) / imgPro.width;
-    doc.addImage(data,'PNG' , 0, 0, width , hight);    
+    doc.addImage(data, 'PNG', 0, 0, width, hight);
     doc.save("Order.pdf");
   }
 
+
+  const filteredData = orders.filter((order) =>
+    Object.values(order).some((val) =>
+      val.toLowerCase().includes(input.toLowerCase())
+    )
+  );
 
 
   return (
@@ -133,8 +142,8 @@ const Order = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.length > 0 ? (
-              orders.map((datas, index) => (
+            {filteredData.length > 0 ? (
+              filteredData.map((datas, index) => (
                 <tr key={index}>
                   <td>{datas.OrderId}</td>
                   <td>{datas.Customer_id}</td>
