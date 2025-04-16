@@ -1,4 +1,4 @@
-import { React, useState ,useRef } from 'react'
+import { React, useState, useRef } from 'react'
 import ComponentHeader from '../../layout/ComponentHeader'
 import ModalComp from '../../layout/ModalComp'
 import AccountForm from './AccountForm'
@@ -8,11 +8,16 @@ import jsPDF from 'jspdf';
 import "jspdf-autotable";
 import html2canvas from 'html2canvas';
 import exportFromJSON from 'export-from-json'
+import { useSelector } from 'react-redux'
 
 const Account = () => {
 
+
     const [Accounts, setAccounts] = useState([]);
     const [ViewAcc, setViewAcc] = useState([]);
+
+
+    const input = useSelector(state => state.input.value);
 
     const handleAddAccount = (account) => {
         setAccounts([...Accounts, account]);
@@ -35,7 +40,11 @@ const Account = () => {
         modalInstance.show();
     };
 
-
+    const filteredData = Accounts.filter((account) =>
+        Object.values(account).some((val) =>
+            val.toLowerCase().includes(input.toLowerCase())
+        )
+    );
 
     const handleExportCsv = () => {
         const fileName = "Account";
@@ -57,7 +66,7 @@ const Account = () => {
             link.download = "account.json";
             document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link);
+            document.body.removeChild(link);    
         }
         else {
             alert("Insert first");
@@ -65,7 +74,7 @@ const Account = () => {
     };
 
     const printData = useRef(null);
-   
+
 
     const handleExportPdf = async () => {
 
@@ -106,8 +115,8 @@ const Account = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {Accounts.length > 0 ? (
-                            Accounts.map((datas, index) => (
+                        {filteredData.length > 0 ? (
+                            filteredData.map((datas, index) => (
                                 <tr key={index}>
                                     <td>{datas.id}</td>
                                     <td>{datas.code}</td>

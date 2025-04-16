@@ -9,8 +9,11 @@ import jsPDF from 'jspdf';
 import autoTable from "jspdf-autotable"; 
 import html2canvas from 'html2canvas';
 import exportFromJSON from 'export-from-json'
+import { useSelector } from 'react-redux';
 
 const Products = () => {
+  
+  const input = useSelector(state => state.input.value);
 
   const [products, setProducts] = useState([]);
 
@@ -111,6 +114,12 @@ const Products = () => {
     doc.save("Product.pdf");
   };
 
+  
+  const filteredData = products.filter((product) =>
+    Object.values(product).some((val) =>
+      val.toLowerCase().includes(input.toLowerCase())
+    )
+  );
 
   const handleExportCsv = ()  =>{
     const fileName = "product";
@@ -145,8 +154,8 @@ const Products = () => {
             </tr>
           </thead>
           <tbody>
-            {products.length > 0 ? (
-              products.map((datas, index) => (
+            {filteredData.length > 0 ? (
+              filteredData.map((datas, index) => (
                 <tr key={index}>
                   <td>{datas.id}</td>
                   <td>{datas.name}</td>
