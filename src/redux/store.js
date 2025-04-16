@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { inputSlice } from './Input/inputSlice'
-export const store = configureStore({
+import inputReducer from './features/Input/inputSlice'
+import authReducer from './features/auth/authSlice'
+
+export default configureStore({
   reducer: {
-    counter: inputSlice,
-  },
+    input: inputReducer,
+    auth: authReducer,
+  }
 })

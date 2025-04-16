@@ -9,15 +9,17 @@ import jsPDF from 'jspdf';
 import "jspdf-autotable";
 import html2canvas from 'html2canvas';
 import exportFromJSON from 'export-from-json'
-import { useOutletContext } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+
 const Order = () => {
   const [orders, setOrders] = useState([]);
   const [currentOrder, setCurrentOrder] = useState(null);
   const [ShowOnView, setShowOnView] = useState([]);
 
-  const input = useOutletContext();
+  const input = useSelector(state => state.input.value);
 
-  console.log("this is the order com", input);
+  console.log("this is selector is uesed", input);
 
   const handleEdit = (order) => {
     setCurrentOrder(order);

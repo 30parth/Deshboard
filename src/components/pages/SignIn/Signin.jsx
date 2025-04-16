@@ -1,11 +1,16 @@
 import {React, useContext ,useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import './signIn.css'
-import { loginContext } from '../../../context/context';
+// import { loginContext } from '../../../context/context';
+import { useSelector ,useDispatch } from 'react-redux';
+import { setAuthValue, setUserName } from '../../../redux/features/auth/authSlice';
 
 const SignIn = () => {
-    const {Login , changeLogin } = useContext(loginContext);
+    // const {Login , changeLogin } = useContext(loginContext);
     
+    const dispatch = useDispatch();
+    const isLogin = useSelector(state => state.auth.isLogin)
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,9 +20,14 @@ const SignIn = () => {
         if (email === "abc@gmail.com" && password === "1234") 
         {   
             console.log("Navigating to /dashboard");
+            dispatch(setAuthValue(true));
+            dispatch(setUserName(email));
             navigate('/dashboard'); // Redirect to the "/dashboard" path
-            changeLogin(); 
-            console.log(Login);
+        } else if (email === "parth@gmail.com" && password === "1234") {
+            console.log("Navigating to /dashboard");
+            dispatch(setAuthValue(true));
+            dispatch(setUserName(email));
+            navigate('/dashboard'); // Redirect to the "/dashboard" path
         }
     }
     return (
