@@ -1,12 +1,8 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import OrderForm from '../pages/Order/OrderForm'
-import ProductForm from '../pages/Product/ProductForm'
+import {React} from 'react'
 
-const ModalComp = ({modalTitle, component}) => {
-    let location = useLocation()
+const ModalComp = ({modalTitle, component ,modalRef}) => {
     return (
-        <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" ref={modalRef} id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">

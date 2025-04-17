@@ -1,11 +1,11 @@
-import { React, useState , useEffect} from 'react'
-
-const OrderForm = ({ handleAdd, order }) => {
+import { React, useState, useEffect } from 'react'
+const OrderForm = ({ handleAdd, order, modalRef }) => {
   const [OrderId, setOrderId] = useState(order?.OrderId || '');
   const [Customer_id, setCustomer_id] = useState(order?.Customer_id || '');
   const [Status, setStatus] = useState(order?.Status || '');
   const [Amount, setAmount] = useState(order?.Amount || '');
 
+  const [validated, setValidated] = useState(false);
 
   useEffect(() => {
     setAmount(order?.Amount || '');
@@ -15,14 +15,12 @@ const OrderForm = ({ handleAdd, order }) => {
   }, [order]);
 
 
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Hi i am order form handlesubmit");
     const orders = { OrderId, Customer_id, Status, Amount };
     handleAdd(orders);
-
-
 
     setAmount('');
     setCustomer_id('');
@@ -30,40 +28,65 @@ const OrderForm = ({ handleAdd, order }) => {
     setOrderId('');
     console.log(orders);
 
-    // Close modal manually using Bootstrap method
+    const bootstrapModal = new bootstrap.Modal(modalRef.current);
+    bootstrapModal.hide();
     const modal = document.getElementById('exampleModal');
     const modalInstance = bootstrap.Modal.getInstance(modal);
     modalInstance.hide();
+  };
+
+  const onSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    else {
+      handleSubmit(event);
+    }
+    setValidated(true);
   };
 
 
 
   // console.log("This is order");
   return (
-    <form onSubmit={handleSubmit} >
-      <div className="modal-body">
+    <div className="modal-body">
+      <form onSubmit={onSubmit} className={`needs-validation ${validated ? "was-validated" : ""}`} noValidate >
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Order ID</label>
-          <input type="text" className="form-control" id="recipient-name" value={OrderId} onChange={(e) => setOrderId(e.target.value)} disabled={order} required/>
+          <input type="text" className="form-control" id="recipient-name" value={OrderId} onChange={(e) => setOrderId(e.target.value)} disabled={order} required />
+          <div class="invalid-feedback">
+            Please Enter the Order Id
+          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Customer_id</label>
-          <input type="text" className="form-control" id="recipient-name" value={Customer_id} onChange={(e) => setCustomer_id(e.target.value)} required/>
+          <input type="text" className="form-control" id="recipient-name" value={Customer_id} onChange={(e) => setCustomer_id(e.target.value)} required />
+          <div class="invalid-feedback">
+            Please Enter the customer Id
+          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">status</label>
-          <input type="text" className="form-control" id="recipient-name" value={Status} onChange={(e) => setStatus(e.target.value)} required/>
+          <input type="text" className="form-control" id="recipient-name" value={Status} onChange={(e) => setStatus(e.target.value)} required />
+          <div class="invalid-feedback">
+            Please Enter the status.
+          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">total_amount</label>
-          <input type="text" className="form-control" id="recipient-name" value={Amount} onChange={(e) => setAmount(e.target.value)} required/>
+          <input type="text" className="form-control" id="recipient-name" value={Amount} onChange={(e) => setAmount(e.target.value)} required />
+          <div class="invalid-feedback">
+            Please Enter the Amount.
+          </div>
         </div>
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >{order ? "Edit" : "Add"}</button>
-      </div>
-    </form>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" className="btn btn-primary" >{order ? "Edit" : "Add"}</button>
+        </div>
+      </form>
+    </div>
   )
 }
 

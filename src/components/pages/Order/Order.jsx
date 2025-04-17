@@ -1,6 +1,5 @@
 import { React, useState, useRef, useEffect } from 'react'
 import ComponentHeader from '../../layout/ComponentHeader'
-// import Table from './Table'
 import ModalComp from '../../layout/ModalComp';
 import OrderForm from './OrderForm'
 import ViewOrder from './ViewOrder';
@@ -18,6 +17,8 @@ const Order = () => {
   const [ShowOnView, setShowOnView] = useState([]);
 
   const input = useSelector(state => state.input.value);
+
+  const modalRef = useRef(null);
 
   console.log("this is selector is uesed", input);
 
@@ -60,13 +61,11 @@ const Order = () => {
     }
   };
 
-
   const handleExportCsv = () => {
     const fileName = "order";
     const exportType = exportFromJSON.types.csv;
     exportFromJSON({ data: orders, fileName, exportType })
   }
-
 
   const handleExportJson = () => {
     if (orders.length !== 0) {
@@ -122,9 +121,11 @@ const Order = () => {
       {/* <Table data={orders} /> */}
       {/* <ModalComp modalTitle={"Add Order"} handleAdd={handleAddOrders} component={<OrderForm  handleAdd={handleAddOrders}/>} /> */}
       <ModalComp
+        modalRef={modalRef.current}
         modalTitle={currentOrder ? "Edit Order" : "Add Orders"}
         component={
           <OrderForm
+            modalRef={modalRef.current}
             order={currentOrder}
             handleAdd={currentOrder ? handleUpdateOrder : handleAddOrders}
           />
