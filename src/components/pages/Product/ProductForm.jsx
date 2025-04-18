@@ -2,7 +2,7 @@ import { React, useState, useEffect  } from 'react'
 
 
 
-const ProductForm = ({ handleAdd, product }) => {
+const ProductForm = ({ handleAdd, product, modalRef }) => {
   const [name, setName] = useState(product?.name || '');
   const [id, setId] = useState(product?.id || '');
   const [type, setType] = useState(product?.type || '');
@@ -24,30 +24,38 @@ const ProductForm = ({ handleAdd, product }) => {
     setType('');
 
 
-    const modal = document.getElementById('exampleModal');
-    const modalInstance = bootstrap.Modal.getInstance(modal);
-    modalInstance.hide();
+    if (modalRef.current) {
+      console.log(modalRef.current)
+      const modalInstance = bootstrap.Modal.getInstance(modalRef.current);
+      if (modalInstance) {
+        modalInstance.hide();
+      } else {
+        console.warn("Modal instance not found for ref:", modalRef.current);
+      }
+    } else {
+      console.error("modalRef.current is null or undefined");
+    }
   };
 
   const [validated, setValidated] = useState(false);
 
   // const [enableAdd, setEnableAdd] = useState(false);
 
+
+
   const onSubmit = (event) => {
     const form = event.currentTarget;
-    console.log("out side the if else")
     if (form.checkValidity() === false) {
-      console.log("In side the if")
       event.preventDefault();
       event.stopPropagation();
       setValidated(true);
     }
     else {
-      console.log("In side the else")
       handleSubmit(event);
       setValidated(false)
     }
   };
+
 
   // const modalRef = useRef(null);
   return (

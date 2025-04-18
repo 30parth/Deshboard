@@ -47,9 +47,13 @@ const Account = () => {
     );
 
     const handleExportCsv = () => {
-        const fileName = "Account";
-        const exportType = exportFromJSON.types.csv;
-        exportFromJSON({ data: Accounts, fileName, exportType })
+        if(Accounts.length!==0) {
+            const fileName = "Account";
+            const exportType = exportFromJSON.types.csv;
+            exportFromJSON({ data: Accounts, fileName, exportType })
+        } else {
+          alert("Insert some data First")
+        }
     }
 
 
@@ -78,19 +82,23 @@ const Account = () => {
 
     const handleExportPdf = async () => {
 
-        const element = printData.current;
-        const canvas = await html2canvas(element, { scale: 2, });
-        const data = canvas.toDataURL('image/png');
+        if(Accounts.length!==0) {
+            const element = printData.current;
+            const canvas = await html2canvas(element, { scale: 2, });
+            const data = canvas.toDataURL('image/png');
 
 
-        const doc = new jsPDF({
-            format: "a4",
-        });
-        const imgPro = doc.getImageProperties(data);
-        const width = doc.internal.pageSize.getHeight();
-        const hight = (imgPro.height * width) / imgPro.width;
-        doc.addImage(data, 'PNG', 0, 0, width, hight);
-        doc.save("account.pdf");
+            const doc = new jsPDF({
+                format: "a4",
+            });
+            const imgPro = doc.getImageProperties(data);
+            const width = doc.internal.pageSize.getHeight();
+            const hight = (imgPro.height * width) / imgPro.width;
+            doc.addImage(data, 'PNG', 0, 0, width, hight);
+            doc.save("account.pdf");
+        } else {
+          alert("Insert some data First")
+        }
     }
 
 

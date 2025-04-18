@@ -62,9 +62,13 @@ const Order = () => {
   };
 
   const handleExportCsv = () => {
-    const fileName = "order";
-    const exportType = exportFromJSON.types.csv;
-    exportFromJSON({ data: orders, fileName, exportType })
+    if(orders.length!==0) {
+      const fileName = "order";
+      const exportType = exportFromJSON.types.csv;
+      exportFromJSON({ data: orders, fileName, exportType })
+    }  else {
+      alert("Insert some data First")
+    }
   }
 
   const handleExportJson = () => {
@@ -91,19 +95,23 @@ const Order = () => {
 
   const handleExportPdf = async () => {
 
-    const element = printData.current;
-    const canvas = await html2canvas(element, { scale: 2, });
-    const data = canvas.toDataURL('image/png');
+    if(orders.length!==0) {
+      const element = printData.current;
+      const canvas = await html2canvas(element, { scale: 2, });
+      const data = canvas.toDataURL('image/png');
 
 
-    const doc = new jsPDF({
-      format: "a4",
-    });
-    const imgPro = doc.getImageProperties(data);
-    const width = doc.internal.pageSize.getHeight();
-    const hight = (imgPro.height * width) / imgPro.width;
-    doc.addImage(data, 'PNG', 0, 0, width, hight);
-    doc.save("Order.pdf");
+      const doc = new jsPDF({
+        format: "a4",
+      });
+      const imgPro = doc.getImageProperties(data);
+      const width = doc.internal.pageSize.getHeight();
+      const hight = (imgPro.height * width) / imgPro.width;
+      doc.addImage(data, 'PNG', 0, 0, width, hight);
+      doc.save("Order.pdf");
+    } else {
+      alert("Insert some data First")
+    }
   }
 
 
@@ -121,18 +129,17 @@ const Order = () => {
       {/* <Table data={orders} /> */}
       {/* <ModalComp modalTitle={"Add Order"} handleAdd={handleAddOrders} component={<OrderForm  handleAdd={handleAddOrders}/>} /> */}
       <ModalComp
-        modalRef={modalRef.current}
+        modalRef={modalRef}
         modalTitle={currentOrder ? "Edit Order" : "Add Orders"}
         component={
           <OrderForm
-            modalRef={modalRef.current}
+            modalRef={modalRef}
             order={currentOrder}
             handleAdd={currentOrder ? handleUpdateOrder : handleAddOrders}
           />
         }
       />
       <ModalView modalTitle={"View The Order"} ViewTable={<ViewOrder ViewData={ShowOnView} />} />
-
       <div className="table-responsive">
         <table ref={printData} className="table table-striped table-sm">
           <thead>
@@ -153,11 +160,11 @@ const Order = () => {
                   <td>{datas.Status}</td>
                   <td>{datas.Amount}</td>
                   <td>
-                    <button type="button" className="btn btn-warning btn-sm" onClick={() => handleEdit(datas)} >Edit</button>
-                    <button type="button" className="btn btn-danger btn-sm" onClick={() => handleDelete(datas.OrderId)}>Delete</button>
-                    <button type="button" className="btn btn-info btn-sm" onClick={() => handleView(datas)} >View</button>
+                    <button type="button" className="btn btn-warning btn-sm mx-1" onClick={() => handleEdit(datas)} >Edit</button>
+                    <button type="button" className="btn btn-danger btn-sm mx-1" onClick={() => handleDelete(datas.OrderId)}>Delete</button>
+                    <button type="button" className="btn btn-info btn-sm mx-1" onClick={() => handleView(datas)} >View</button>
                   </td>
-                </tr>
+                </tr>   
               ))
             ) : (
               <tr>

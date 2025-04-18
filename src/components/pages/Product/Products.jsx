@@ -1,6 +1,5 @@
 import { React, useState ,useRef } from 'react'
 import ComponentHeader from '../../layout/ComponentHeader'
-// import Table from './Table'
 import ModalComp from '../../layout/ModalComp';
 import ProductForm from './ProductForm';
 import ModalView from '../../layout/ModalView';
@@ -37,7 +36,6 @@ const Products = () => {
     setProducts(updatedProducts);
     setCurrentProduct(null);
     console.log("Product updated:", updatedProduct);
-    // setProducts([...products, updatedProduct]);  
   };
 
   const handleAddProduct = (product) => {
@@ -59,7 +57,7 @@ const Products = () => {
     if(products.length !== 0)
     {
       console.log("this is data export")
-      const fileData = JSON.stringify(products); // nicely formatted
+      const fileData = JSON.stringify(products); 
       const blob = new Blob([fileData], { type: "application/json" });
       console.log(blob)
       const url = URL.createObjectURL(blob);
@@ -67,9 +65,7 @@ const Products = () => {
       const link = document.createElement("a");
       link.href = url;
       link.download = "Products.json";
-      // document.body.appendChild(link);
-      link.click();
-      // document.body.removeChild(link);x  
+      link.click(); 
     }
     else
     {
@@ -88,30 +84,34 @@ const Products = () => {
 
 
   const handleExportPdf = () => {
-    const doc = new jsPDF();
-  
-    // Define table headers
-    const headers = [["Product ID", "Product Name", "Product Ordered"]];
-  
-    // Map your products to match the table structure
-    const data = products.map(product => [
-      product.id,
-      product.name,
-      product.type
-    ]);
-  
-    // Generate table
-    autoTable(doc,{
-      head: headers,
-      body: data,
-      startY: 10,
-      theme: 'grid',
-      styles: { fontSize: 10 },
-      headStyles: { fillColor: [22, 160, 133] }, // Optional: Stylish header
-    });
-  
-    // Save the PDF
-    doc.save("Product.pdf");
+    if (products.length!== 0) {
+      const doc = new jsPDF();
+    
+      // Define table headers
+      const headers = [["Product ID", "Product Name", "Product Ordered"]];
+    
+      // Map your products to match the table structure
+      const data = products.map(product => [
+        product.id,
+        product.name,
+        product.type
+      ]);
+    
+      // Generate table
+      autoTable(doc,{
+        head: headers,
+        body: data,
+        startY: 10,
+        theme: 'grid',
+        styles: { fontSize: 10 },
+        headStyles: { fillColor: [22, 160, 133] }, // Optional: Stylish header
+      });
+    
+      // Save the PDF
+      doc.save("Product.pdf");
+    }  else {
+      alert("Insert some data First")
+    }
   };
 
   
@@ -121,10 +121,17 @@ const Products = () => {
     )
   );
 
+  const modalRef = useRef(null);
+
   const handleExportCsv = ()  =>{
-    const fileName = "product";
-    const exportType = exportFromJSON.types.csv;
-    exportFromJSON({data : products, fileName, exportType })
+    if(products.length !== 0)
+    {
+      const fileName = "product";
+      const exportType = exportFromJSON.types.csv;
+      exportFromJSON({data : products, fileName, exportType })
+    }  else {
+      alert("Insert some data First")
+    }
   } 
   return (
     <>
@@ -132,9 +139,11 @@ const Products = () => {
       {/* <Table data={products} /> */}
       {/* <ModalComp modalTitle={"Add Products"} component={<ProductForm handleAdd={handleAddProduct} />} /> */}
       <ModalComp
+        modalRef={modalRef}
         modalTitle={currentProduct ? "Edit Product" : "Add Products"}
         component={
           <ProductForm
+            modalRef={modalRef}
             product={currentProduct}
             handleAdd={currentProduct ? handleUpdateProduct : handleAddProduct}
           />
@@ -161,9 +170,9 @@ const Products = () => {
                   <td>{datas.name}</td>
                   <td>{datas.type}</td>
                   <td>
-                    <button type="button" className="btn btn-warning btn-sm" onClick={() => handleEdit(datas)}>Edit</button>
-                    <button type="button" className="btn btn-danger btn-sm" onClick={() => handleDelete(datas.id)}>Delete</button>
-                    <button type="button" className="btn btn-info btn-sm" onClick={() => handleView(datas)}>View</button>
+                    <button type="button" className="btn btn-warning btn-sm mx-1" onClick={() => handleEdit(datas)}>Edit</button>
+                    <button type="button" className="btn btn-danger btn-sm mx-1" onClick={() => handleDelete(datas.id)}>Delete</button>
+                    <button type="button" className="btn btn-info btn-sm mx-1" onClick={() => handleView(datas)}>View</button>
                   </td>
                 </tr>
               ))

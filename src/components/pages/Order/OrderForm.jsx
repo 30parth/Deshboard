@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react'
+
 const OrderForm = ({ handleAdd, order, modalRef }) => {
   const [OrderId, setOrderId] = useState(order?.OrderId || '');
   const [Customer_id, setCustomer_id] = useState(order?.Customer_id || '');
@@ -15,7 +16,7 @@ const OrderForm = ({ handleAdd, order, modalRef }) => {
   }, [order]);
 
 
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Hi i am order form handlesubmit");
@@ -27,57 +28,63 @@ const OrderForm = ({ handleAdd, order, modalRef }) => {
     setStatus('');
     setOrderId('');
     console.log(orders);
-
-    const bootstrapModal = new bootstrap.Modal(modalRef.current);
-    bootstrapModal.hide();
-    const modal = document.getElementById('exampleModal');
-    const modalInstance = bootstrap.Modal.getInstance(modal);
-    modalInstance.hide();
-  };
+    
+    if (modalRef.current) {
+      console.log(modalRef.current)
+      const modalInstance = bootstrap.Modal.getInstance(modalRef.current);
+      if (modalInstance) {
+        modalInstance.hide();
+      } else {
+        console.warn("Modal instance not found for ref:", modalRef.current);
+      }
+    } else {
+      console.error("modalRef.current is null or undefined");
+    }
+  };  
 
   const onSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     }
     else {
       handleSubmit(event);
+      setValidated(false)
     }
-    setValidated(true);
   };
 
 
 
   // console.log("This is order");
   return (
-    <div className="modal-body">
       <form onSubmit={onSubmit} className={`needs-validation ${validated ? "was-validated" : ""}`} noValidate >
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Order ID</label>
           <input type="text" className="form-control" id="recipient-name" value={OrderId} onChange={(e) => setOrderId(e.target.value)} disabled={order} required />
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please Enter the Order Id
           </div>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">Customer_id</label>
           <input type="text" className="form-control" id="recipient-name" value={Customer_id} onChange={(e) => setCustomer_id(e.target.value)} required />
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please Enter the customer Id
           </div>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">status</label>
           <input type="text" className="form-control" id="recipient-name" value={Status} onChange={(e) => setStatus(e.target.value)} required />
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please Enter the status.
           </div>
         </div>
         <div className="mb-3">
           <label htmlFor="recipient-name" className="col-form-label">total_amount</label>
           <input type="text" className="form-control" id="recipient-name" value={Amount} onChange={(e) => setAmount(e.target.value)} required />
-          <div class="invalid-feedback">
+          <div className="invalid-feedback">
             Please Enter the Amount.
           </div>
         </div>
@@ -86,7 +93,6 @@ const OrderForm = ({ handleAdd, order, modalRef }) => {
           <button type="submit" className="btn btn-primary" >{order ? "Edit" : "Add"}</button>
         </div>
       </form>
-    </div>
   )
 }
 
