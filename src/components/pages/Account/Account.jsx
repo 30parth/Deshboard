@@ -16,14 +16,34 @@ const Account = () => {
     const [Accounts, setAccounts] = useState([]);
     const [ViewAcc, setViewAcc] = useState([]);
 
-
+    const [editData, setEditData] = useState(null);
     const input = useSelector(state => state.input.value);
 
     const handleAddAccount = (account) => {
-        setAccounts([...Accounts, account]);
-        console.log("Account added:", account);
+        if (editData) {
+            const updatedAccounts = Accounts.map((item) =>
+                item.id === account.id ? account : item
+            );
+            setAccounts(updatedAccounts);
+            setEditData(null); // Clear edit state after updating
+            console.log("Account updated:", account);
+        } else {
+            const idExists = Accounts.some(item => item.id === account.id);
+            if (idExists) {
+                alert("ID already exists. Please use a unique ID.");
+                return;
+            }
+            setAccounts([...Accounts, account]);
+            console.log("Account added:", account);
+        }
     };
-
+    const handleEdit = (account) => {
+        setEditData(account); 
+        const modal = document.getElementById('exampleModal');
+        const modalInstance = new bootstrap.Modal(modal);
+        modalInstance.show();
+    };
+    
     const handleDelete = (id) => {
         const isConFirm = window.confirm('Are you sure you want to delete this');
         if (isConFirm) {
@@ -107,7 +127,7 @@ const Account = () => {
             <div>
                 <>
                     <ComponentHeader header={"Accounts"} showButton={true} handleExportJson={handleExportJson} handleExportPdf={handleExportPdf} handleExportCsv={handleExportCsv} />
-                    <ModalComp modalTitle={"Add Account"} component={<AccountForm handleAdd={handleAddAccount} />} />
+                    <ModalComp modalTitle={"Add Account"} component={<AccountForm handleAdd={handleAddAccount}  editData={editData}/>} />
                     <ModalView modalTitle={"View The Account"} ViewTable={<ViewAccount ViewData={ViewAcc} />} />
                 </>
             </div>

@@ -1,6 +1,6 @@
-import { React, useState } from 'react'
+import { React, useState ,useEffect } from 'react'
 
-const AccountForm = ({ handleAdd }) => {
+const AccountForm = ({ handleAdd ,editData }) => {
     const [Addcontact, setAddcontact] = useState(1);
 
     const [account, setAccount] = useState({
@@ -22,6 +22,13 @@ const AccountForm = ({ handleAdd }) => {
             }
         ],
     });
+
+    useEffect(() => {
+        if (editData) {
+            setAccount(editData);
+        }
+    }, [editData]);
+    
     const addNewForm = () => {
         setAccount(prevState => ({
             ...prevState,
