@@ -146,6 +146,7 @@ const Products = () => {
             modalRef={modalRef}
             product={currentProduct}
             handleAdd={currentProduct ? handleUpdateProduct : handleAddProduct}
+            productList={products}
           />
         }
       />

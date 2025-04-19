@@ -1,7 +1,9 @@
 import { React, useState, useEffect } from 'react'
 
-const AccountForm = ({ handleAdd, editData , modalRef}) => {
+const AccountForm = ({ handleAdd, editData, modalRef, accountList = [] }) => {
     const [Addcontact, setAddcontact] = useState(1);
+
+    const [idError, setIdError] = useState(false);
 
     const [account, setAccount] = useState({
         id: "",
@@ -72,7 +74,22 @@ const AccountForm = ({ handleAdd, editData , modalRef}) => {
     console.log(account);
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Handle Submit ")
+
+        // Prevent submission if ID is empty
+        if (!account.id) {
+            setValidated(true);
+            setIdError(true);
+            return;
+        }
+
+        // Only check for duplicate ID when adding (not editing)
+        const isDuplicate = accountList.some(f => f.id === account.id);
+        if (!editData && isDuplicate) {
+            setValidated(true);
+            setIdError(true);
+            return;
+        }
+
         handleAdd(account);
         setAccount({
             id: "",
@@ -93,19 +110,22 @@ const AccountForm = ({ handleAdd, editData , modalRef}) => {
                 }
             ],
         });
+        setValidated(false);
+        setIdError(false);
 
+        // Hide modal
         if (modalRef.current) {
-            console.log(modalRef.current)
             const modalInstance = bootstrap.Modal.getInstance(modalRef.current);
             if (modalInstance) {
-              modalInstance.hide();
+                modalInstance.hide();
             } else {
-              console.warn("Modal instance not found for ref:", modalRef.current);
+                console.warn("Modal instance not found for ref:", modalRef.current);
             }
-          } else {
+        } else {
             console.error("modalRef.current is null or undefined");
-          }
-    }
+        }
+    };
+
 
     const [validated, setValidated] = useState(false);
 
@@ -138,9 +158,22 @@ const AccountForm = ({ handleAdd, editData , modalRef}) => {
             <div className="modal-body">
                 <div className="mb-3">
                     {/* <label htmlFor="recipient-name" className="col-form-label">Id</label> */}
-                    <input type="text" className="form-control" id="id" name="id" value={account.id} onChange={handleChange} placeholder='Id' required disabled={editData}/>
+                    <input
+                        type="text"
+                        className={`form-control ${idError ? "is-invalid" : ""}`}
+                        id="product-id"
+                        name="id"
+                        value={account.id}
+                        onChange={(e) => {
+                            handleChange(e);
+                            if (idError) setIdError(false);
+                        }}
+                        readOnly={!!editData}
+                        placeholder="Account ID"
+                        required
+                    />
                     <div className="invalid-feedback">
-                        Please Enter Account Id 
+                        {idError ? " Id already Exist " : "Please Enter the Product Id"}
                     </div>
                 </div>
                 <div className="mb-3">

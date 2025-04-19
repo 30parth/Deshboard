@@ -136,6 +136,7 @@ const Order = () => {
             modalRef={modalRef}
             order={currentOrder}
             handleAdd={currentOrder ? handleUpdateOrder : handleAddOrders}
+            orderList={orders}
           />
         }
       />

@@ -128,7 +128,7 @@ const Account = () => {
             <div>
                 <>
                     <ComponentHeader header={"Accounts"} showButton={true} handleExportJson={handleExportJson} handleExportPdf={handleExportPdf} handleExportCsv={handleExportCsv} />
-                    <ModalComp modalRef={modalRef} modalTitle={editData ? "Edit Account" : "Add Account"} component={<AccountForm handleAdd={handleAddAccount}  editData={editData} modalRef={modalRef}/>} />
+                    <ModalComp modalRef={modalRef} modalTitle={editData ? "Edit Account" : "Add Account"} component={<AccountForm handleAdd={handleAddAccount} accoutnList={Accounts} editData={editData} modalRef={modalRef}/>} />
                     <ModalView modalTitle={"View The Account"} ViewTable={<ViewAccount ViewData={ViewAcc} />} />
                 </>
             </div>
