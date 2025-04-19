@@ -52,7 +52,7 @@ const ProductForm = ({ handleAdd, product, modalRef, productList }) => {
       handleAdd(updatedProduct);
       setName('');
       setId('');
-      setType('');    
+      setType('');  
       if (modalRef.current) {
         console.log(modalRef.current)
         const modalInstance = bootstrap.Modal.getInstance(modalRef.current);
@@ -69,7 +69,10 @@ const ProductForm = ({ handleAdd, product, modalRef, productList }) => {
     }
   };
 
+
   // const [enableAdd, setEnableAdd] = useState(false);
+
+
 
   const onSubmit = (event) => {
     const form = event.currentTarget;

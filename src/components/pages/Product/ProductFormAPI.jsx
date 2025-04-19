@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { React, useState, useEffect } from 'react'
+import { useDispatch ,useSelector} from 'react-redux';
+import { postData } from '../../../redux/features/fetchApi/fetchApiSlice';
+
 
 const ProductFormAPI = ({ product, modalRef, productList }) => {
   const [title, setTitle] = useState(product?.title || '');
@@ -7,6 +10,9 @@ const ProductFormAPI = ({ product, modalRef, productList }) => {
   const [type, setType] = useState(product?.type || '');
   const [idError, setIdError] = useState(false);
   const [validated, setValidated] = useState(false);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setTitle(product?.title || '');
     setId(product?.id || '');
@@ -14,10 +20,10 @@ const ProductFormAPI = ({ product, modalRef, productList }) => {
   }, [product]);
 
   const addToApi = (data) => {
-    axios.post("https://fakestoreapi.com/products",data)
-    .then((res)=>console.log(res))
-    .catch((error)=>console.log(error))
+    dispatch(postData(data));    
   }
+
+  console.log(useSelector(state => state.fetchApi.res))
 
   const handleSubmit = (e) => {
     console.log(e);

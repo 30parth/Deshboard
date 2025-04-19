@@ -3,22 +3,28 @@ import { React, useEffect, useRef, useState } from 'react'
 import ComponentHeader from '../../layout/ComponentHeader'
 import ModalComp from '../../layout/ModalComp';
 import ProductFormAPI from './ProductFormAPI';
+import { useDispatch ,useSelector } from 'react-redux';
+import { fetchData } from '../../../redux/features/fetchApi/fetchApiSlice';
 const ProductAPI = () => {
 
-    const [data, setData] = useState([]);
+    // const getData = async () => {
 
-    const getData = async () => {
+    //     axios.get("https://fakestoreapi.com/products")
+    //         .then(res => setData(res.data))
+    //         .catch(error => console.log(error))
+    // }
 
-        axios.get("https://fakestoreapi.com/products")
-            .then(res => setData(res.data))
-            .catch(error => console.log(error))
-    }
-
+    // useEffect(() => {
+    //     getData()
+    // }, [])
+    const dispatch = useDispatch();
     useEffect(() => {
-        getData()
-    }, [])
+        dispatch(fetchData())
+    }, [dispatch])
+    
+    const state = useSelector(state => state.fetchApi.data)
+    console.log(state);
     const modalRef = useRef();
-    console.log("This is data", data)
     return (
         <>
             <ComponentHeader header={"Products"} showButton={true} />
@@ -28,7 +34,7 @@ const ProductAPI = () => {
                 component={
                     <ProductFormAPI
                         modalRef={modalRef}
-                        productList={data}
+                        productList={state}
                     />
                 } />
             <div className="table-responsive table-hover py-5">
@@ -41,8 +47,8 @@ const ProductAPI = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.length > 0 ? (
-                            data.map((datas, index) => (
+                        {state.length > 0 ? (
+                            state.map((datas, index) => (
                                 <tr key={index}>
                                     <td>{datas.id}</td>
                                     <td>{datas.title}</td>
