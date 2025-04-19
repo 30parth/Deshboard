@@ -15,8 +15,6 @@ const OrderForm = ({ handleAdd, order, modalRef }) => {
     setOrderId(order?.OrderId || '');
   }, [order]);
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Hi i am order form handlesubmit");
@@ -28,7 +26,6 @@ const OrderForm = ({ handleAdd, order, modalRef }) => {
     setStatus('');
     setOrderId('');
     console.log(orders);
-    
     if (modalRef.current) {
       console.log(modalRef.current)
       const modalInstance = bootstrap.Modal.getInstance(modalRef.current);

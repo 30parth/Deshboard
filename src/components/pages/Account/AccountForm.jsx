@@ -1,6 +1,6 @@
-import { React, useState ,useEffect } from 'react'
+import { React, useState, useEffect } from 'react'
 
-const AccountForm = ({ handleAdd ,editData }) => {
+const AccountForm = ({ handleAdd, editData , modalRef}) => {
     const [Addcontact, setAddcontact] = useState(1);
 
     const [account, setAccount] = useState({
@@ -28,7 +28,7 @@ const AccountForm = ({ handleAdd ,editData }) => {
             setAccount(editData);
         }
     }, [editData]);
-    
+
     const addNewForm = () => {
         setAccount(prevState => ({
             ...prevState,
@@ -93,8 +93,21 @@ const AccountForm = ({ handleAdd ,editData }) => {
                 }
             ],
         });
+
+        if (modalRef.current) {
+            console.log(modalRef.current)
+            const modalInstance = bootstrap.Modal.getInstance(modalRef.current);
+            if (modalInstance) {
+              modalInstance.hide();
+            } else {
+              console.warn("Modal instance not found for ref:", modalRef.current);
+            }
+          } else {
+            console.error("modalRef.current is null or undefined");
+          }
     }
 
+    const [validated, setValidated] = useState(false);
 
     const removeForm = (index) => {
         setAccount(prevState => ({
@@ -107,45 +120,82 @@ const AccountForm = ({ handleAdd ,editData }) => {
     // const [Code, setCode] = useState('');
     // const [Name, setName] = useState('');
 
+    const onSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            setValidated(true);
+        }
+        else {
+            handleSubmit(event);
+            setValidated(false)
+        }
+    }
+
     return (
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={onSubmit} className={`needs-validation ${validated ? "was-validated" : ""}`} noValidate>
             <div className="modal-body">
                 <div className="mb-3">
                     {/* <label htmlFor="recipient-name" className="col-form-label">Id</label> */}
-                    <input type="text" className="form-control" id="id" name="id" value={account.id} onChange={handleChange} placeholder='Id' />
+                    <input type="text" className="form-control" id="id" name="id" value={account.id} onChange={handleChange} placeholder='Id' required disabled={editData}/>
+                    <div className="invalid-feedback">
+                        Please Enter Account Id 
+                    </div>
                 </div>
                 <div className="mb-3">
                     {/* <label htmlFor="recipient-name" className="col-form-label">Code</label> */}
-                    <input type="text" className="form-control" id="code" name="code" value={account.code} onChange={handleChange} placeholder='Code' />
+                    <input type="text" className="form-control" id="code" name="code" value={account.code} onChange={handleChange} placeholder='Code' required />
+                    <div className="invalid-feedback">
+                        Please Enter Account Code
+                    </div>
                 </div>
                 <div className="mb-3">
                     {/* <label htmlFor="recipient-name" className="col-form-label">Name</label> */}
-                    <input type="text" className="form-control" id="name" name="name" value={account.name} onChange={handleChange} placeholder='Name' />
+                    <input type="text" className="form-control" id="name" name="name" value={account.name} onChange={handleChange} placeholder='Name' required />
+                    <div className="invalid-feedback">
+                        Please Enter Account Name
+                    </div>
                 </div>
                 <div className="row g-3 py-3">
                     <div className="col-md-4">
                         {/* <label htmlFor="inputState" className="form-label">Address Type</label> */}
-                        <select id="addressType" name="address.type" className="form-select" value={account.address.type} onChange={handleChange}>
+                        <select id="addressType" name="address.type" className="form-select" value={account.address.type} onChange={handleChange} required>
                             <option value="ContType">Choose...</option>
                             <option value="Office">Office</option>
                             <option value="Home">Home</option>
                         </select>
+                        <div className="invalid-feedback">
+                            Please Select any one
+                        </div>
                     </div>
                     <div className="col-8">
                         {/* <label htmlFor="inputAddress" className="form-label">Address</label> */}
-                        <input type="text" className="form-control" id="Address" name="address.address" value={account.address.address} onChange={handleChange} placeholder="Address" />
+                        <input type="text" className="form-control" id="Address" name="address.address" value={account.address.address} onChange={handleChange} placeholder="Address" required />
+                        <div className="invalid-feedback">
+                            Please Enter Address
+                        </div>
                     </div>
                     <div className="col-md-4">
                         {/* <label htmlFor="inputCity" className="form-label">City</label> */}
-                        <input type="text" className="form-control" id="City" name="address.city" value={account.address.city} onChange={handleChange} placeholder="City" />
+                        <input type="text" className="form-control" id="City" name="address.city" value={account.address.city} onChange={handleChange} placeholder="City" required />
+                        <div className="invalid-feedback">
+                            Please Enter City Name
+                        </div>
                     </div>
                     <div className="col-md-4">
                         {/* <label htmlFor="inputState" className="form-label">State</label> */}
-                        <input type="text" className="form-control" id="state" name="address.state" value={account.address.state} onChange={handleChange} placeholder="State" />
+                        <input type="text" className="form-control" id="state" name="address.state" value={account.address.state} onChange={handleChange} placeholder="State" required />
+                        <div className="invalid-feedback">
+                            Please Enter State Name
+                        </div>
                     </div>
                     <div className="col-md-4">
                         {/* <label htmlFor="inputZip" className="form-label">Country</label> */}
-                        <input type="text" className="form-control" id="country" name="address.country" value={account.address.country} onChange={handleChange} placeholder="Country" />
+                        <input type="text" className="form-control" id="country" name="address.country" value={account.address.country} onChange={handleChange} placeholder="Country" required />
+                        <div className="invalid-feedback">
+                            Please Enter Country Name
+                        </div>
                     </div>
                 </div>
                 {account.contacts.map((contact, index) => (
@@ -157,22 +207,30 @@ const AccountForm = ({ handleAdd ,editData }) => {
                                 name="contactType"
                                 value={contact.contactType}
                                 onChange={(e) => handleArrayChange(e, index)}
+                                required
                             >
                                 <option value="ContType">Contact Type</option>
                                 <option value="Mobile">Mobile</option>
                                 <option value="Email">Email</option>
                             </select>
+                            <div className="invalid-feedback">
+                                Please Select any one
+                            </div>
                         </div>
                         <div className="col-md-4">
                             <input
-                                type="text"
+                                type={`${contact.contactType === "Email" ? "email" : "number"}`}
                                 className="form-control"
                                 id="contactDetail"
                                 name="contactDetail"
                                 value={contact.contactDetail}
                                 onChange={(e) => handleArrayChange(e, index)}
                                 placeholder="Contact Detail"
+                                required
                             />
+                            <div className="invalid-feedback">
+                                Please Enter Contect Detail
+                            </div>
                         </div>
                         <div className="col-md-3">
                             <input
@@ -183,7 +241,11 @@ const AccountForm = ({ handleAdd ,editData }) => {
                                 id="contactPerson"
                                 onChange={(e) => handleArrayChange(e, index)}
                                 placeholder="Contact Name"
+                                required
                             />
+                            <div className="invalid-feedback">
+                                Please Enter Contect Person Name
+                            </div>
                         </div>
                         <div className="col-md-1">
                             {index === account.contacts.length - 1 ? (
@@ -202,7 +264,7 @@ const AccountForm = ({ handleAdd ,editData }) => {
 
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" >Add</button>
+                <button type="submit" className="btn btn-primary" >{editData ? "Edit" : "Add"}</button>
             </div>
         </form>
     )

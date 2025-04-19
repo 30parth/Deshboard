@@ -19,6 +19,8 @@ const Account = () => {
     const [editData, setEditData] = useState(null);
     const input = useSelector(state => state.input.value);
 
+    const modalRef = useRef()
+
     const handleAddAccount = (account) => {
         if (editData) {
             const updatedAccounts = Accounts.map((item) =>
@@ -42,7 +44,7 @@ const Account = () => {
         const modal = document.getElementById('exampleModal');
         const modalInstance = new bootstrap.Modal(modal);
         modalInstance.show();
-    };
+    };  
     
     const handleDelete = (id) => {
         const isConFirm = window.confirm('Are you sure you want to delete this');
@@ -75,7 +77,6 @@ const Account = () => {
           alert("Insert some data First")
         }
     }
-
 
     const handleExportJson = () => {
         if (Accounts.length !== 0) {
@@ -127,7 +128,7 @@ const Account = () => {
             <div>
                 <>
                     <ComponentHeader header={"Accounts"} showButton={true} handleExportJson={handleExportJson} handleExportPdf={handleExportPdf} handleExportCsv={handleExportCsv} />
-                    <ModalComp modalTitle={"Add Account"} component={<AccountForm handleAdd={handleAddAccount}  editData={editData}/>} />
+                    <ModalComp modalRef={modalRef} modalTitle={editData ? "Edit Account" : "Add Account"} component={<AccountForm handleAdd={handleAddAccount}  editData={editData} modalRef={modalRef}/>} />
                     <ModalView modalTitle={"View The Account"} ViewTable={<ViewAccount ViewData={ViewAcc} />} />
                 </>
             </div>
@@ -150,9 +151,9 @@ const Account = () => {
                                     <td>{datas.code}</td>
                                     <td>{datas.name}</td>
                                     <td>
-                                        <button type="button" className="btn btn-warning btn-sm" onClick={() => handleEdit(datas)} >Edit</button>
-                                        <button type="button" className="btn btn-danger btn-sm" onClick={() => handleDelete(datas.id)}>Delete</button>
-                                        <button type="button" className="btn btn-info btn-sm" onClick={() => handleView(datas)} >View</button>
+                                        <button type="button" className="btn btn-warning btn-sm mx-1" onClick={() => handleEdit(datas)} >Edit</button>
+                                        <button type="button" className="btn btn-danger btn-sm mx-1" onClick={() => handleDelete(datas.id)}>Delete</button>
+                                        <button type="button" className="btn btn-info btn-sm mx-1" onClick={() => handleView(datas)} >View</button>
 
                                     </td>
                                 </tr>
