@@ -49,6 +49,12 @@ const Sidebar = () => {
                                     Integrations
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className={location.pathname==="/AddProperty"?"nav-link active":"nav-link"}  to="/AddProperty">
+                                    <span data-feather="layers"></span>
+                                    Add Property
+                                </Link>
+                            </li>
                         </ul>
                         <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                             <span>Saved reports</span>

@@ -16,6 +16,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import MainCom from './components/pages/MainCom';
 import { loginContext } from './context/context';
 import ProductAPI from './components/pages/Product/ProductAPI';
+import Tab1 from './components/pages/AddProperty/Tab1';
 
 
 function App() {
@@ -65,6 +66,10 @@ function App() {
         {
           path: "/Integrations",
           element: <Integrations />,
+        },
+        {
+          path: "/AddProperty",
+          element: <Tab1/>,
         }
       ]
     }
