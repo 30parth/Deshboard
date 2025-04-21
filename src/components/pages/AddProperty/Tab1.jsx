@@ -1,7 +1,7 @@
 import React from 'react'
-import "./theme.min.css"
-import "./bootstrap.min.js"
-import "./all.min.js"
+import "./CSS/theme.min.css"
+import "./JS/bootstrap.min.js"
+import "./JS/all.min.js"
 const Tab1 = () => {
     return (
         <main >
