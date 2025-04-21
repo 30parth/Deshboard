@@ -51,7 +51,7 @@ const Sidebar = () => {
                             </li>
                             <li className="nav-item">
                                 <Link className={location.pathname==="/AddProperty"?"nav-link active":"nav-link"}  to="/AddProperty">
-                                    <span data-feather="layers"></span>
+                                    <span data-feather="plus"></span>
                                     Add Property
                                 </Link>
                             </li>
