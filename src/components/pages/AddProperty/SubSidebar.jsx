@@ -45,13 +45,11 @@ const SubSidebar = () => {
                 <div className="scrollbar mb-4">
                     <ul className="nav justify-content-between flex-nowrap nav-wizard nav-wizard-vertical-xl"
                         data-tab-map-container="data-tab-map-container">
-                        <li className="nav-item">
                             {
-                                steperData.map((data) => (
-                                            <Steper img={data.img} title={data.title} link={data.link}/>
+                                steperData.map((data,key ) => (
+                                            <Steper key={key} img={data.img} title={data.title} link={data.link}/>
                                         ))
                             }
-                        </li>
                     </ul>
                 </div>
             </div>

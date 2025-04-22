@@ -18,7 +18,8 @@ const Photos = () => {
                                     className="btn btn-link p-0" type="button">Browse from
                                 device</button><br /><img className="mt-3 me-2"
                                     src="./img/icons/image-icon.png" width="40"
-                                    alt="" /></div>
+                                    alt="" />
+                        </div>
                         <div className="dz-preview d-flex flex-wrap mt-3">
                             <div className="rounded-2 overflow-hidden me-2 mb-2 position-relative"
                                 style={{ height: "140px", width: "200px" }}><img
