@@ -28,7 +28,7 @@ const Done = () => {
                             <div className="mt-4 scrollbar"><a
                                 className="fs-9 fw-semibold mb-2 d-inline-block"
                                 href="#!">Edit info</a>
-                                <table className="w-100">
+                                {/* <table className="w-100">
                                     <thead>
                                         <tr>
                                             <th style={{ width: "176px" }}></th>
@@ -176,7 +176,7 @@ const Done = () => {
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> */}
                             </div>
                         </div>
                     </div>
@@ -197,7 +197,7 @@ const Done = () => {
                             <div className="mt-4 scrollbar"><a
                                 className="fs-9 fw-semibold mb-2 d-inline-block"
                                 href="#!">Edit location</a>
-                                <table className="w-100">
+                                {/* <table className="w-100">
                                     <thead>
                                         <tr>
                                             <th style={{ width: "176px" }}></th>
@@ -281,7 +281,7 @@ const Done = () => {
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table>  */}
                             </div>
                         </div>
                     </div>
@@ -303,7 +303,7 @@ const Done = () => {
                             <div className="mt-4 scrollbar"><a
                                 className="fs-9 fw-semibold mb-2 d-inline-block"
                                 href="#!">Edit amenities</a>
-                                <table className="w-100">
+                                {/* <table className="w-100">
                                     <thead>
                                         <tr>
                                             <th style={{ width: "176px" }}></th>
@@ -507,7 +507,7 @@ const Done = () => {
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table>  */}
                             </div>
                         </div>
                     </div>
@@ -572,7 +572,7 @@ const Done = () => {
                                 href="#!">Edit finance</a>
                                 <h5 className="fw-bolder mb-3">Payment from PBM</h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: "176px" }}></th>
@@ -701,12 +701,12 @@ const Done = () => {
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                                 <h5 className="fw-bolder mb-3 mt-4">Payment from Guests (On
                                     property)</h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: "176px" }}></th>
@@ -757,7 +757,7 @@ const Done = () => {
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table>  */}
                                 </div>
                             </div>
                         </div>
@@ -781,7 +781,7 @@ const Done = () => {
                                 href="#!">Edit policies</a>
                                 <h5 className="mb-3 fw-bolder">Check-in-Policy</h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: "176px" }}></th>
@@ -893,11 +893,11 @@ const Done = () => {
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                                 <h5 className="mb-3 fw-bolder mt-4">Checkout Policy</h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: "176px" }}></th>
@@ -966,11 +966,11 @@ const Done = () => {
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                                 <h5 className="mb-3 fw-bolder mt-4">Cancellation Policy</h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: "176px" }}></th>
@@ -1022,11 +1022,11 @@ const Done = () => {
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                                 <h5 className="mb-3 fw-bolder mt-4">Pet Policy</h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: "176px" }}></th>
@@ -1079,11 +1079,11 @@ const Done = () => {
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                                 <h5 className="mb-3 fw-bolder mt-4">Child Policy</h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <tr>
                                             <th style={{ width: "176px" }}></th>
                                             <th style={{ width: "32px" }}></th>
@@ -1148,12 +1148,12 @@ const Done = () => {
                                                     Not-Available</p>
                                             </td>
                                         </tr>
-                                    </table>
+                                    </table> */}
                                 </div>
                                 <h5 className="mb-3 fw-bolder mt-4">Included Taxes in your rate
                                 </h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: "176px" }}></th>
@@ -1277,11 +1277,11 @@ const Done = () => {
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                                 <h5 className="mb-3 fw-bolder mt-4">Your Documentations</h5>
                                 <div className="scrollbar">
-                                    <table className="w-100">
+                                    {/* <table className="w-100">
                                         <thead>
                                             <tr>
                                                 <th style={{ width: "176px" }}></th>
@@ -1332,7 +1332,7 @@ const Done = () => {
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                             </div>
                         </div>
